@@ -7,7 +7,11 @@
 \subsection*{Introduzione}
 Lo scopo del progetto era quello di realizzare, tramite la piattaforma Arduino, un simulatore del classico gioco "Pong". Tale gioco prende il nome di "LedPong", in quanto implementato attraverso dei led.
 \subsection*{Logica Implementativa}
-Per implementare il gioco abbiamo strutturato varie funzioni :\begin{itemize}\item \textbf{waitStart()}: In modo ciclico esegue la pulsazione del led flash, eseguendo una sequenza di istruzioni tratte dallo sketch di fading all'interno di un ciclo while. Tale ciclo termina solamente quando viene premuto il pulsante associato al led, per avviare il loop di gioco.\item \textbf{randomDirection()} : Viene avviata appena termina il waitStart() e ha lo scopo di calcolare, attraverso una funzione randomica, la direzione di partenza della pallina. Dopo essere partita dal centro, decide se spostarsi a destra o a sinistra. \item \textbf{loop()}: All'interno del loop di funzionamento di Arduino, abbiamo inserito una serie di controlli quali il controllo sulla direzione e sullo stato di gioco. L'esito di tali controlli servono per scegliere quale routine di gioco avviare. \\Le routine sono: 
+Per implementare il gioco abbiamo strutturato varie funzioni :
+\begin{itemize}
+\item \textbf{waitStart()}: In modo ciclico esegue la pulsazione del led flash, eseguendo una sequenza di istruzioni tratte dallo sketch di fading all'interno di un ciclo while. Tale ciclo termina solamente quando viene premuto il pulsante associato al led, per avviare il loop di gioco.
+\item \textbf{randomDirection()} : Viene avviata appena termina il waitStart() e ha lo scopo di calcolare, attraverso una funzione randomica, la direzione di partenza della pallina. Dopo essere partita dal centro, decide se spostarsi a destra o a sinistra.
+ \item \textbf{loop()}: All'interno del loop di funzionamento di Arduino, abbiamo inserito una serie di controlli quali il controllo sulla direzione e sullo stato di gioco. L'esito di tali controlli servono per scegliere quale routine di gioco avviare. \\Le routine sono: 
 \begin{itemize}
 \item runPlayerOne(): effettua lo scorrimento verso sinistra.
 \item runPlayerTwo(): effettua lo scorrimento verso destra.
@@ -18,15 +22,22 @@ All'interno di queste due routine sono impostate le seguenti variabili di stato:
 \item pressedButtonTwo
 \end{itemize}
 che consentono l'interazione con gli interrupt associati alla pressione dei pulsanti T1 e T2.
+\item \textbf{decrementRT()}: Effettua il decremento del react time all'avvenire di ogni scambio. Dovendo effettuare una riduzione di  $1/8$, quindi effettuo una moltiplicazione per $7/8$.
+\item \textbf{readPotent()}: Effettua la lettura del valore del potenziometro, e in base al range in cui si trova il valore letto, va a settare la variabile "Speed" con il valore deciso.
+\item \textbf{blinky()}: Al termine della partita, questa funzione fa lampeggiare il led del giocatore perdente per 2 secondi. Al termine risetta le variabili "game" e "loser" a 0.
 \end{itemize}
-
 \subsection*{Gestione degli interrupt}
 Gli interrupt all'interno del nostro programma sono associati ai bottoni di gioco T1 e T2.
 Tale pulsanti sono collegati ai pin digitali 2 e 3 di Arduino con lo scopo di sfruttare le funzionalità di interrupt integrate nel sistema.
 \\I due interrupt quando eseguiti, avviano un funzione di check specifica per il bottone da cui avviato.
 \\Tale funzione controlla lo stato delle variabili prima illustrate pressedButtonOne e pressedButtonTwo, in modo tale da capire se il tasto è stato premuto nel momento giusto e quindi il gioco continua o se il pulsante è stato premuto nel momento sbagliato e quindi il gioco deve terminare.
-
-
-
+\\
+\\
+\\
+\\
+\\
+\\
+\\
+Enrico Gnagnarella, Anis Lico, Tommaso Ghini
 
 \end{document}
