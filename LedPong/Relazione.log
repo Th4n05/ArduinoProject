@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.9.26)  15 OCT 2018 20:32
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.9.26)  17 OCT 2018 14:55
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -79,30 +79,31 @@ LaTeX Font Info:    ... okay on input line 5.
 LaTeX Info: Redefining \it@ocap on input line 5.
 LaTeX Info: Redefining \it@ccap on input line 5.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 7.
+(Font)              <7> on input line 18.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 7.
+(Font)              <5> on input line 18.
  [1
 
 {/usr/local/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] (./Rela
 zione.aux) ) 
 Here is how much of TeX's memory you used:
- 1312 strings out of 492649
- 15314 string characters out of 6129622
+ 1318 strings out of 492649
+ 15382 string characters out of 6129622
  86853 words of memory out of 5000000
- 5248 multiletter control sequences out of 15000+600000
- 5947 words of font info for 17 fonts, out of 8000000 for 9000
+ 5251 multiletter control sequences out of 15000+600000
+ 8254 words of font info for 20 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  23i,4n,23p,790b,117s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2018/texmf-dist/fonts/enc/dvips/cm-super/cm-sup
 er-t1.enc}</usr/local/texlive/2018/texmf-dist/fonts/type1/public/cm-super/sfbx1
-000.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/cm-super/sfrm070
-0.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/cm-super/sfrm1000.
-pfb>
-Output written on Relazione.pdf (1 page, 27818 bytes).
+200.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/cm-super/sfbx144
+0.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/cm-super/sfrm0700.
+pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pf
+b>
+Output written on Relazione.pdf (1 page, 40986 bytes).
 PDF statistics:
- 21 PDF objects out of 1000 (max. 8388607)
- 14 compressed objects within 1 object stream
+ 25 PDF objects out of 1000 (max. 8388607)
+ 17 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
