@@ -1,3 +1,4 @@
+/* Tale progetto è stato sviluppato dal gruppo formato da: Enrico Gnagnarella, Anis Lico, Tommaso Ghini, come specificato nel nome del file di codice*/
 #define LED_FLASH 9
 #define LED1 13
 #define LED2 12
@@ -114,7 +115,6 @@ void loop() {
 void runPlayerOne()
 {
   //accende la sequenza di led
-
   digitalWrite(LED2, LOW);
   digitalWrite(LED1, HIGH);
   pressedButtonOne = true;
@@ -136,7 +136,6 @@ void runPlayerOne()
 void runPlayerTwo()
 {
   //Sequenza di led
-
   digitalWrite(LED2, LOW);
   digitalWrite(LED3, HIGH);
   pressedButtonTwo = true;
