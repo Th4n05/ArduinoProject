@@ -56,7 +56,7 @@ void loop() {
     readPotent();
     Serial.print("Velocità selezionata:");
     Serial.println(Speed);
-    randomDirection();
+    waitSecond();
   }
   if (dir == 1)
   {
@@ -65,14 +65,14 @@ void loop() {
       digitalWrite(LED2, HIGH);
       delay(Speed);
       runPlayerOne();
- 
+
       decrementRT();
       if (game == 1)
       {
         digitalWrite(LED2, HIGH);
         delay(Speed);
         runPlayerTwo();
-      
+
         decrementRT();
       }
     }// end while
@@ -85,7 +85,7 @@ void loop() {
       digitalWrite(LED2, HIGH);
       delay(Speed);
       runPlayerTwo();
-  
+
       decrementRT();
       if (game == 1 )
       {
@@ -118,7 +118,7 @@ void runPlayerOne()
   digitalWrite(LED2, LOW);
   digitalWrite(LED1, HIGH);
   pressedButtonOne = true;
-  if (game != 2) {
+  if (game != 2 && game != 0) {
     noInterrupts();
     game = 2;
     loser = 1;
@@ -140,7 +140,7 @@ void runPlayerTwo()
   digitalWrite(LED2, LOW);
   digitalWrite(LED3, HIGH);
   pressedButtonTwo = true;
-  if (game != 2) {
+  if (game != 2 && game != 0) {
     noInterrupts();
     game = 2;
     loser = 2;
@@ -152,6 +152,15 @@ void runPlayerTwo()
   digitalWrite(LED3, LOW);
 }
 
+
+void waitSecond() {
+    digitalWrite(LED2, HIGH);
+    delay(2000);
+    digitalWrite(LED2, LOW);
+    randomDirection();
+    game = 1;
+    count = 0;
+}
 
 void waitStart() {
 
@@ -168,15 +177,12 @@ void waitStart() {
     delay(15);
   }
   analogWrite(LED_FLASH, 0);
+  game = 0;
 }
 
 
 void randomDirection() {
-  //i = 1;
-  digitalWrite(LED2, HIGH);
   dir = random(2);
-  delay(Speed);
-  digitalWrite(LED2, LOW);
 }
 
 
@@ -186,7 +192,7 @@ void check1() {
     loser = 1;
   }
   else {
-     count++;
+    count++;
     loser = 0;
     game = 1;
   }
