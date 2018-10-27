@@ -6,6 +6,17 @@
 \section*{Relazione Led Pong} 
 \subsection*{Introduzione}
 Lo scopo del progetto era quello di realizzare, tramite la piattaforma Arduino, un simulatore del classico gioco "Pong". Tale gioco prende il nome di "LedPong", in quanto implementato attraverso dei led.
+\subsection*{Architettura e Progettazione Iniziale}
+Siamo partiti ragionando che avremmo avuto due routine principali:
+\begin{itemize}
+\item {Pulsazione led flash}:
+Questo piccolo loop avrebbe dovuto gestire la pulsazione del led e attendere la pressione del pulsante per far avviare la seconda routine. Al pulsante non abbiamo deciso di assegnarli un interrupt in quanto essendo un operazione non fondamentale al funzionamento responsivo del gioco, abbiamo inserito un semplice controllo dentro al ciclo, sapendo che a volte si rischia di non rilevare l'evento.
+\item {Movimento della pallina}:
+Per la sequenza di rimbalzo della pallina abbiamo deciso che sarebbe stato il loop centrale di gioco  ad eseguirlo.
+Per rispettare tutte le specifiche richieste abbiamo impostato che all'arrivo a qualsiasi delle estremità dei led, si assume che il gioco sia perso, in modo che se il bottone non viene premuto il gioco termini.
+I pulsanti verranno gestiti attraverso gli interrupt, ogni bottone avrà il suo. In questo modo al loro click verrà avviata una funzione di check, che imposterà le variabili di gioco in modo tale da interrompere il gioco se non fosse il proprio turno o farlo procedere in caso contrario.
+Questo controllo della funzione check, avviene attraverso una variabile di stato booleana che indica se sia o meno il proprio turno per premere il pulsante e che verrà impostata all'interno del loop centrale.
+\end{itemize}
 \subsection*{Logica Implementativa}
 Per implementare il gioco abbiamo strutturato varie funzioni :
 \begin{itemize}
