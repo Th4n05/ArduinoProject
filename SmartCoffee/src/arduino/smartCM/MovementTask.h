@@ -9,7 +9,7 @@ class MovementTask: public Task {
   int pin;
   PirSensor* pir;
   external enum state;
-  external bool movement;
+  bool movement;
 
 public:
 

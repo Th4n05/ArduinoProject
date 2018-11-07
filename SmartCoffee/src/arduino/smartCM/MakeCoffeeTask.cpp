@@ -12,12 +12,13 @@ void MakeCoffeeTask::init(int period){
   for (int i = 0; i < 3; i++){
     led[i] = new Led(pin[i]); 
   }
-  state = 0;    
+  num = 0;    
 }
   
 void MakeCoffeeTask::tick(){
-  led[state]->switchOff();
-  state = (state + 1) % 3;
-  led[state]->switchOn();
+  /*aggiugnere avvio solo se è il mio turno*/
+  led[num]->switchOff();
+  num = (num + 1) % 3;
+  led[num]->switchOn();
   delayMicroseconds(10000);
 }

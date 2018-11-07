@@ -8,7 +8,8 @@ class MakeCoffeeTask: public Task {
 
   int pin[3];
   Light* led[3];
-  int state;
+  int num;
+  bool makeCoffee;
 
 public:
 
