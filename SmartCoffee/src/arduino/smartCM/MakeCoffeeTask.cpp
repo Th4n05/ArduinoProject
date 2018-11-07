@@ -15,14 +15,30 @@ void MakeCoffeeTask::init(int period)
   {
     led[i] = new Led(pin[i]);
   }
-  num = 0;
+  num = -1;
 }
 
 void MakeCoffeeTask::tick()
 {
-  /*aggiugnere avvio solo se è il mio turno con MakeCoffee*/
-  led[num]->switchOff();
-  num = (num + 1) % 3;
-  led[num]->switchOn();
-  delayMicroseconds(10000);
+  if (makeCoffee)
+  {
+    if (num == -1)
+    {
+      num = (num + 1);
+      led[num]->switchOn();
+      delayMicroseconds(10000);
+    }
+    else
+    {
+      led[num]->switchOff();
+      num = (num + 1);
+      led[num]->switchOn();
+      delayMicroseconds(10000);
+    }
+    if (num >= 2)
+    {
+      makeCoffee = false;
+      num = -1;
+    }
+  }
 }
