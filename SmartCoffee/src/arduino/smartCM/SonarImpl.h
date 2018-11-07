@@ -7,11 +7,12 @@ class SonarImpl : public Sonar
 {
 
   public:
-    SonarImpl(int pin);
+    SonarImpl(int trig, int echo);
     float getDistance();
 
   private:
-    int pin;
+    int trigPin;
+    int echoPin;
 };
 
 #endif

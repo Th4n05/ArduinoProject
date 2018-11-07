@@ -1,10 +1,10 @@
-#ifndef __THREELEDSTASK__
-#define __THREELEDSTASK__
+#ifndef __MAINTASK__
+#define __MAINTASK__
 
 #include "Task.h"
-#include "Led.h"
 
-class ThreeLedsTask: public Task {
+
+class MainTask: public Task {
 
   int pin[3];
   Light* led[3];
