@@ -13,17 +13,22 @@ import javax.swing.SwingConstants;
 
 public class SimpleGUI extends JFrame {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
     private JPanel jp;
     private JButton jb;
     private JLabel title;
     private JLabel text;
     private JProgressBar bar;
     private JPanel minPanel;
+    private Model model;
 
     public SimpleGUI() {
         this.setSize((int) (getToolkit().getScreenSize().width * 0.5),
                 (int) (getToolkit().getScreenSize().height * 0.5));
-
+        this.model = new ModelImpl();
         BorderLayout bl1 = new BorderLayout();
         this.jp = new JPanel(bl1);
         this.jb = new JButton("Ricarica caffè");
@@ -51,5 +56,8 @@ public class SimpleGUI extends JFrame {
             text.setText("Stiamo ricaricando la macchina");
         });
     }
-
+    
+    public static void main(String[] args){
+        new SimpleGUI();
+    }
 }
