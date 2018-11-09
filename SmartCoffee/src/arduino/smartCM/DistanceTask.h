@@ -2,7 +2,7 @@
 #define __DISTANCETASK__
 
 #include "Task.h"
-#include "Led.h"
+#include "Sonar.h"
 
 class DistanceTask: public Task {
 

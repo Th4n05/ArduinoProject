@@ -2,7 +2,7 @@
 #define __MOVEMENTTASK__
 
 #include "Task.h"
-#include "Sonar.h"
+#include "PirSensor.h"
 
 class MovementTask: public Task {
 

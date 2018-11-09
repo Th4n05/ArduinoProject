@@ -13,4 +13,5 @@ void DistanceTask::init(int period){
   
 void DistanceTask::tick(){
   distance = sonar->getDistance();
+  
 }
