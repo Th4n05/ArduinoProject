@@ -2,13 +2,13 @@
 #define __MOVEMENTTASK__
 
 #include "Task.h"
-#include "PirSensor.h"
+#include "PirSensorImpl.h"
+
 
 class MovementTask: public Task {
 
   int pin;
-  PirSensor* pir;
-  external enum state;
+  PirSensorImpl* pir;
   bool movement;
 
 public:

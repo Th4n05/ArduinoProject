@@ -1,5 +1,8 @@
 #include "Scheduler.h"
 #include "MakeCoffeeTask.h"
+#include "MovementTask.h"
+#include "DistanceTask.h"
+
 
 
 Scheduler sched;
@@ -13,17 +16,17 @@ void setup(){
   sched.addTask(t0);*/
 
 
-  Task* t1 = new MakeCoffeeTask(11,12,13);
+  /*Task* t1 = new MakeCoffeeTask(11,12,13);
   t1->init(150);
-  sched.addTask(t1);  
+  sched.addTask(t1); */ 
 
-  Task* t2 = new MovementTask(4);
-  t2->init(150);
-  sched.addTask(t2); 
+  /*Task* t2 = new MovementTask(4);
+  t2->init(50);
+  sched.addTask(t2); */
 
-  Task* t3 = new DistanceTask(A0);
-  t3->init(150);
-  sched.addTask(t3); 
+  Task* t3 = new DistanceTask(7, 8);
+  t3->init(100);
+  sched.addTask(t3);
     
 }
 

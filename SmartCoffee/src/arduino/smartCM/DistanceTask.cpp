@@ -9,9 +9,10 @@ DistanceTask::DistanceTask(int trig, int echo){
 void DistanceTask::init(int period){
   Task::init(period);
   sonar = new SonarImpl(trigPin, echoPin);
+  Serial.begin(9600);
 }
   
 void DistanceTask::tick(){
-  distance = sonar->getDistance();
+  Serial.println(sonar->getDistance());
   
 }
