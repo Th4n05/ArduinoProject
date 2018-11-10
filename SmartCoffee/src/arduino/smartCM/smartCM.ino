@@ -27,12 +27,12 @@ void setup() {
   t1->init(100);
   sched.addTask(t1);
   
-  Task* t2 = new MovementTask(4);
-  t2->init(150);
+  Task* t2 = new MovementTask(3);
+  t2->init(50);
   sched.addTask(t2);
   
  Task* t3 = new DistanceTask(7, 8);
-  t3->init(200);
+  t3->init(50);
   sched.addTask(t3);
 
 }

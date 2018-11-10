@@ -12,8 +12,7 @@ void MovementTask::init(int period){
 }
   
 void MovementTask::tick(){
-  movement = true;
-  //movement  = pir->isMoved();
+  movement  = pir->isMoved();
   /* questa operazione la può fare solo negli stati di on e stand by,
     negli altri stati non serve*/
 }
