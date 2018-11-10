@@ -7,7 +7,5 @@ PirSensorImpl::PirSensorImpl(int pin){
 } 
   
 bool PirSensorImpl::isMoved(){
-  return digitalRead(pin) == HIGH;
+  return (digitalRead(pin) == HIGH);
 }
-
-

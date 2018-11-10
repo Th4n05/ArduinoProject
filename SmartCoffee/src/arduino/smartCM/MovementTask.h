@@ -2,7 +2,7 @@
 #define __MOVEMENTTASK__
 
 #include "Task.h"
-#include "PirSensor.h"
+#include "PirSensorImpl.h"
 
 extern bool movement;
 
@@ -10,7 +10,7 @@ extern bool movement;
 class MovementTask: public Task {
 
     int pin;
-    PirSensor* pir;
+    PirSensorImpl* pir;
 
   public:
 

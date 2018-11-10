@@ -2,9 +2,10 @@
 #include "MainTask.h"
 #include "MsgService.h"
 #include "Arduino.h"
-#include "MakeCoffe.h"
+#include "MakeCoffeeTask.h"
+#include "Maintaince.h"
 
-#define NUMRECHARGE 10;
+#define NUMRECHARGE 10
 
 extern int numCoffee;
 
@@ -17,11 +18,11 @@ void Maintaince::init(int period) {
   MsgService.init();
 }
 
-void Maintaince::tick() {
-  if(state==6)){
+void Maintaince::tick(){
+  if(state==6){
     if (MsgService.isMsgAvailable()) {
       Msg* msg = MsgService.receiveMsg();
-      if(numeCoffee < NUMRECHARGE){
+      if(numCoffee < NUMRECHARGE){
         if (msg->getContent() == "ok"){
           numCoffee = NUMRECHARGE;
         }

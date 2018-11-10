@@ -5,6 +5,7 @@
 #include "ButtonImpl.h"
 
 extern int state;
+extern int numCoffee;
 
 
 class MainTask : public Task
@@ -14,6 +15,7 @@ class MainTask : public Task
     int timeStandby;
     int pinButton;
     ButtonImpl *button;
+    int period;
     //dovremmo includere anche il potenziometro
 
   public:

@@ -11,34 +11,43 @@ MakeCoffeeTask::MakeCoffeeTask(int pin0, int pin1, int pin2)
 void MakeCoffeeTask::init(int period)
 {
   Task::init(period);
+  this->period = period;
   for (int i = 0; i < 3; i++)
   {
     led[i] = new Led(pin[i]);
   }
   num = -1;
+  timeLed = 0;
 }
 
 void MakeCoffeeTask::tick()
 {
   if (makeCoffee)
   {
-    if (num == -1)
-    {
-      num = (num + 1);
-      led[num]->switchOn();
-      delay(1000);
+    if (timeLed >= 1000) {
+
+      if (num == -1)
+      {
+        num = (num + 1);
+        led[num]->switchOn();
+        timeLed = 0;
+      }
+      else
+      {
+        led[num]->switchOff();
+        num = (num + 1);
+        led[num]->switchOn();
+        timeLed = 0;
+      }
+      if (num >= 2)
+      {
+        timeLed = 0;
+        makeCoffee = false;
+        num = -1;
+      }
     }
-    else
-    {
-      led[num]->switchOff();
-      num = (num + 1);
-      led[num]->switchOn();
-      delay(1000);
-    }
-    if (num >= 2)
-    {
-      makeCoffee = false;
-      num = -1;
+    else {
+      timeLed += period;
     }
   }
 }

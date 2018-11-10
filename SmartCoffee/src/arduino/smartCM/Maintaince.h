@@ -3,7 +3,7 @@
 
 #include "Task.h"
 
-class Maintaince::public Task {
+class Maintaince: public Task {
 
   char pressButton;
   int numRecharge;

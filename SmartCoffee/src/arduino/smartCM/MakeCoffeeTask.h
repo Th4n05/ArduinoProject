@@ -12,6 +12,8 @@ class MakeCoffeeTask : public Task
     int pin[3];
     Light *led[3];
     int num;
+    int timeLed;
+    int period;
 
   public:
     MakeCoffeeTask(int pin0, int pin1, int pin2);
