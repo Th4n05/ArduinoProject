@@ -3,7 +3,8 @@
 #include "DistanceTask.h"
 #include "MakeCoffeeTask.h"
 #include "MovementTask.h"
-
+#include <avr/sleep.h>
+#include <avr/power.h>
 
 const float DIST1 = 0.3;
 const float DIST2 = 0.1;
@@ -37,9 +38,36 @@ void MainTask::tick()
   {
     case 0:
       Serial.println("stato Stand By");
+
+
+
+
+
       if (movement)
       {
         state = 1;
+      } else {
+        Serial.println("Dormo");
+        set_sleep_mode(SLEEP_MODE_IDLE);
+        sleep_enable();
+
+        /* Disable all of the unused peripherals. This will reduce power
+           consumption further and, more importantly, some of these
+           peripherals may generate interrupts that will wake our Arduino from
+           sleep!
+        */
+        power_adc_disable();
+        power_spi_disable();
+        power_timer0_disable();
+        power_timer2_disable();
+        power_twi_disable();
+        /* Now enter sleep mode. */
+        sleep_mode();
+        /* The program will continue from here after the timer timeout*/
+        sleep_disable(); /* First thing to do is disable sleep. */
+        /* Re-enable the peripherals. */
+        power_all_enable();
+        Serial.println("Mi sveglio");
       }
       break;
 
