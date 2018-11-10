@@ -32,15 +32,16 @@ void MakeCoffeeTask::tick()
         led[num]->switchOn();
         timeLed = 0;
       }
-      else
+      else if( num < 2)
       {
         led[num]->switchOff();
         num = (num + 1);
         led[num]->switchOn();
         timeLed = 0;
       }
-      if (num >= 2)
+      else if (num >= 2)
       {
+        led[num]->switchOff();
         timeLed = 0;
         makeCoffee = false;
         num = -1;

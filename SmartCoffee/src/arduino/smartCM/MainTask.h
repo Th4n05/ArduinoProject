@@ -13,6 +13,7 @@ class MainTask : public Task
     int timeOn;
     int timeReady;
     int timeStandby;
+    int timeCoffee;
     int pinButton;
     ButtonImpl *button;
     int period;

@@ -12,7 +12,7 @@ const int DT2a = 5;
 const int DT2b = 5;
 const int DT3 = 3;
 const int DT4 = 5;
-const int NMAX = 10;
+const int NMAX = 3;
 
 MainTask::MainTask(int pin)
 {
@@ -28,6 +28,7 @@ void MainTask::init(int period)
   timeStandby = 0;
   timeReady = 0;
   timeOn = 0;
+  numCoffee = 0;
 }
 
 void MainTask::tick()
@@ -83,7 +84,7 @@ void MainTask::tick()
         {
           state = 5;
           makeCoffee = true;
-          numCoffee--;
+          timeCoffee = 0;
         }
         break;
 
@@ -106,14 +107,30 @@ void MainTask::tick()
 
       case 5:
         Serial.println("stato MAKECOFFEE");
-        if(!makeCoffee){ //vuol dire che il caffè è stato fatto.
-        state = 3;
-        
-        /*if ((numCoffee - NMAX) == 0) {
-          state = 6;
-        }else{
-          
-        }*/}
+        if (!makeCoffee) { //vuol dire che il caffè è stato fatto.
+          timeCoffee += period;
+          if (timeCoffee <= (DT4 * 1000)) {
+
+            if (distance <= DIST2) {
+              numCoffee++;
+              if (numCoffee == NMAX) {
+                state = 6;
+              } else {
+                state = 3;
+              }
+              Serial.println("PASSAGGIOA A READY rimosso caffe");
+            }
+          } else {
+            numCoffee++;
+            if (numCoffee == NMAX) {
+              state = 6;
+            } else {
+              state = 3;
+            }
+            Serial.println("PASSAGGIOA A READY ");
+
+          }
+        }
 
         break;
 
