@@ -4,17 +4,19 @@
 #include "Task.h"
 #include "PirSensor.h"
 
+extern bool movement;
+
+
 class MovementTask: public Task {
 
-  int pin;
-  PirSensor* pir;
-  bool movement;
+    int pin;
+    PirSensor* pir;
 
-public:
+  public:
 
-  MovementTask(int pin);  
-  void init(int period);  
-  void tick();
+    MovementTask(int pin);
+    void init(int period);
+    void tick();
 };
 
 #endif

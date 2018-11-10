@@ -26,14 +26,14 @@ void MakeCoffeeTask::tick()
     {
       num = (num + 1);
       led[num]->switchOn();
-      delayMicroseconds(10000);
+      delay(1000);
     }
     else
     {
       led[num]->switchOff();
       num = (num + 1);
       led[num]->switchOn();
-      delayMicroseconds(10000);
+      delay(1000);
     }
     if (num >= 2)
     {

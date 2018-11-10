@@ -1,5 +1,6 @@
 #include "MovementTask.h"
 #include "Arduino.h"
+#include "PirSensorImpl.h"
 
 MovementTask::MovementTask(int pin){
   this->pin = pin;

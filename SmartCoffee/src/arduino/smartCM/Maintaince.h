@@ -2,18 +2,15 @@
 #define __MOVEMENTTASK__
 
 #include "Task.h"
-#include "MainTask.h"
-#include "MsgService.h"
 
-
-class Maintaince: public Task {
+class Maintaince::public Task {
 
   char pressButton;
   int numRecharge;
 
 public:
 
-  Maintaince();  
+  Maintaince();
   void init(int period);
   void tick();
 };

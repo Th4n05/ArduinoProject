@@ -4,18 +4,11 @@
 #include "Task.h"
 #include "ButtonImpl.h"
 
+extern int state;
+
+
 class MainTask : public Task
 {
-    enum
-    {
-        STANDBY,
-        ON1,
-        ON2,
-        READY1,
-        READY2,
-        MAKECOFFEE,
-        MAINTAINCE
-    } state;
     int timeOn;
     int timeReady;
     int timeStandby;

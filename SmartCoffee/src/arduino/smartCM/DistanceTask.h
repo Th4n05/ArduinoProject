@@ -2,20 +2,22 @@
 #define __DISTANCETASK__
 
 #include "Task.h"
-#include "Sonar.h"
+#include "SonarImpl.h"
+
+extern float distance;
+
 
 class DistanceTask: public Task {
 
-  int echoPin;
-  int trigPin;
-  Sonar* sonar;
-  float distance;
-  
-public:
+    int echoPin;
+    int trigPin;
+    SonarImpl* sonar;
 
-  DistanceTask(int echo, int trig);  
-  void init(int period);  
-  void tick();
+  public:
+
+    DistanceTask(int echo, int trig);
+    void init(int period);
+    void tick();
 };
 
 #endif

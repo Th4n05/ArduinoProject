@@ -31,7 +31,7 @@ public class SimpleGUI extends JFrame {
         this.model = new ModelImpl();
         BorderLayout bl1 = new BorderLayout();
         this.jp = new JPanel(bl1);
-        this.jb = new JButton("Ricarica caffÃ¨");
+        this.jb = new JButton("Ricarica caffè");
         this.title = new JLabel("Coffee Machine", SwingConstants.CENTER);
         this.text = new JLabel("Testo", SwingConstants.CENTER);
         this.text.setFont(new Font("Helvetica", Font.TYPE1_FONT, 20));
@@ -54,6 +54,11 @@ public class SimpleGUI extends JFrame {
 
         jb.addActionListener(e -> {
             text.setText("Stiamo ricaricando la macchina");
+            try {
+				model.comunication();
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
         });
     }
     

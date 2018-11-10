@@ -22,81 +22,84 @@ void MainTask::init(int period)
 {
   Task::init(period);
   button = new ButtonImpl(pinButton);
-  state = STANBY;
+  state = 0;
   timeStandby = 0;
   timeReady = 0;
-  timerOn = 0;
+  timeOn = 0;
+  Serial.begin(9600);
 }
 
 void MainTask::tick()
 {
   switch (state)
   {
-  case STANDBY:
-    if (MovementTask::movement)
-    {
-      state = ON;
-    }
-    break;
-
-  case ON1:
-    if (DistanceTask::distance < DIST1)
-    {
-      timeOn = 0;
-      state = ON2;
-      /*if(!movement){
-      tim
-    } QUI DOVREMMO METTERE IL RITORNO A STANDBY MA NON SAPPIAMO COME AZZERARE timeStandby*/
-      break;
-    case ON2:
-      if (distance > DIST1)
+    case 0:
+    Serial.println("stato Stand By");
+      if (movement)
       {
-        state = ON1;
+        state = 1;
       }
-      else
+      break;
+
+    case 1:
+      if (distance < DIST1)
       {
-        timeOn += 50;
-        if (timeOn >= (DT1 * 1000))
+        timeOn = 0;
+        state = 2;
+        /*if(!movement){
+          tim
+          } QUI DOVREMMO METTERE IL RITORNO A STANDBY MA NON SAPPIAMO COME AZZERARE timeStandby*/
+        break;
+      case 2:
+        if (distance > DIST1)
         {
-          state = READY1;
+          state = 1;
         }
-      }
-      break;
-
-    case READY1:
-      if (distance > DIST1)
-      {
-        timeReady = 0;
-        state = READY2;
-      }
-      if (button->isPressed())
-      {
-        state = MAKECOFFEE;
-        makeCoffee = true;
-      }
-      break;
-
-    case READY2:
-      if (distance > DIST1)
-      {
-        timeReady += 50;
-        if (timeReady >= DT2)
+        else
         {
-          state = ON1;
+          timeOn += 50;
+          if (timeOn >= (DT1 * 1000))
+          {
+            state = 3;
+          }
         }
+        break;
+
+      case 3:
+        if (distance > DIST1)
+        {
+          timeReady = 0;
+          state = 4;
+        }
+        if (button->isPressed())
+        {
+          state = 5;
+          makeCoffee = true;
+        }
+        break;
+
+      case 4:
+        if (distance > DIST1)
+        {
+          timeReady += 50;
+          if (timeReady >= DT2a) // ho messo a ma non so quale dei 2 DT2 sia
+          {
+            state = 1;
+          }
+        }
+        else
+        {
+          state = 3;
+        }
+        break;
+
+      case 5:
+
+        break;
+
+      case 6:
+
+        break;
       }
-      else
-      {
-        state = READY1;
-      }
-      break;
-
-    case MAKECOFFEE:
-
-      break;
-
-    case MAINTAINCE:
-
-      break;
-    }
   }
+}

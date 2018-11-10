@@ -15,14 +15,8 @@ class ModelImpl implements Model {
         System.out.println("Ready.");
     }
 
-    public void comunication() throws Exception {
-        while (true) {
-            System.out.println("Sending ping");
-            channel.sendMsg("ping");
-            String msg = channel.receiveMsg();
-            System.out.println("Received: " + msg);
-            Thread.sleep(500);
-        }
+    public void comunication() throws Exception {  		
+    		channel.sendMsg("ok");
     }
 
 }
