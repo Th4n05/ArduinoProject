@@ -6,6 +6,7 @@
 
 extern int state;
 extern int numCoffee;
+extern bool maintaince;
 
 
 class MainTask : public Task
@@ -23,6 +24,7 @@ class MainTask : public Task
     MainTask(int pin);
     void init(int period);
     void tick();
+    void checkMaintaince();
 };
 
 #endif
