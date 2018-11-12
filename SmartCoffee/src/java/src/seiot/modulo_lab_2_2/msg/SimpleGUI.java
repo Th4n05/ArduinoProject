@@ -22,10 +22,11 @@ public class SimpleGUI extends JFrame {
     private JPanel minPanel;
     private Model model;
 
-    public SimpleGUI() {
+    public SimpleGUI() throws Exception {
         this.setSize((int) (getToolkit().getScreenSize().width * 0.5),
                 (int) (getToolkit().getScreenSize().height * 0.5));
         this.model = new ModelImpl();
+        this.model.connectArduino();
         BorderLayout bl1 = new BorderLayout();
         this.jp = new JPanel(bl1);
         this.jb = new JButton("Ricarica caffe'");
@@ -50,7 +51,6 @@ public class SimpleGUI extends JFrame {
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
         jb.addActionListener(e -> {
-            text.setText("Stiamo ricaricando la macchina");
             try {
                 this.model.rechargeCoffee(String.valueOf(NC));
             } catch (Exception e1) {
