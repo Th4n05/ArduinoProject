@@ -24,6 +24,7 @@ class MainTask : public Task
     MainTask(int pin);
     void init(int period);
     void tick();
+    void energySaving();
     void checkMaintaince();
 };
 

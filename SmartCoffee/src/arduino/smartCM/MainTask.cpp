@@ -34,6 +34,31 @@ void MainTask::init(int period)
   numCoffee = 0;
 }
 
+void energySaving()
+{
+  Serial.println("Dormo");
+  set_sleep_mode(SLEEP_MODE_IDLE);
+  sleep_enable();
+
+  /* Disable all of the unused peripherals. This will reduce power
+           consumption further and, more importantly, some of these
+           peripherals may generate interrupts that will wake our Arduino from
+           sleep!
+        */
+  power_adc_disable();
+  power_spi_disable();
+  power_timer0_disable();
+  power_timer2_disable();
+  power_twi_disable();
+  /* Now enter sleep mode. */
+  sleep_mode();
+  /* The program will continue from here after the timer timeout*/
+  sleep_disable(); /* First thing to do is disable sleep. */
+  /* Re-enable the peripherals. */
+  power_all_enable();
+  Serial.println("Mi sveglio");
+}
+
 void checkMaintaince()
 {
   if (numCoffee == NMAX)
@@ -60,27 +85,7 @@ void MainTask::tick()
     }
     else
     {
-      Serial.println("Dormo");
-      set_sleep_mode(SLEEP_MODE_IDLE);
-      sleep_enable();
-
-      /* Disable all of the unused peripherals. This will reduce power
-           consumption further and, more importantly, some of these
-           peripherals may generate interrupts that will wake our Arduino from
-           sleep!
-        */
-      power_adc_disable();
-      power_spi_disable();
-      power_timer0_disable();
-      power_timer2_disable();
-      power_twi_disable();
-      /* Now enter sleep mode. */
-      sleep_mode();
-      /* The program will continue from here after the timer timeout*/
-      sleep_disable(); /* First thing to do is disable sleep. */
-      /* Re-enable the peripherals. */
-      power_all_enable();
-      Serial.println("Mi sveglio");
+      energySaving();
     }
     break;
 
@@ -160,14 +165,12 @@ void MainTask::tick()
           {
             numCoffee++;
             checkMaintaince();
-            Serial.println("PASSAGGIOA A READY rimosso caffe");
           }
         }
         else
         {
           numCoffee++;
           checkMaintaince();
-          Serial.println("PASSAGGIOA A READY ");
         }
       }
 
@@ -176,6 +179,20 @@ void MainTask::tick()
     case 6:
       Serial.println("stato MAINTAINCE");
       MsgService.sendMsg("No more coffee. Waiting for recharge");
+      if (!maintaince)
+      {
+        if (state == 6)
+        {
+          state = 0;
+        }
+        else
+        {
+          Serial.println("ERRORE");
+        }
+      }else{
+        Serial.println("Attendo ricarica");
+      }
+
       break;
     }
   }
