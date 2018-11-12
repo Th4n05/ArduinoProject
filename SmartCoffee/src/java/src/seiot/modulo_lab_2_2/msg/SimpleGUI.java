@@ -35,9 +35,9 @@ public class SimpleGUI extends JFrame {
         this.text.setFont(new Font("Helvetica", Font.TYPE1_FONT, 20));
         this.title.setFont(new Font("Helvetica", Font.BOLD, 32));
         this.title.setForeground(Color.BLUE);
-        this.bar = new JProgressBar();
+        this.bar = new JProgressBar(0,5);
         this.bar.setSize((int) (this.getSize().width * 0.7), (int) (this.getSize().height * 0.1));
-        this.bar.setValue(25);
+        this.bar.setValue(2);
 
         jp.add(title, BorderLayout.NORTH);
         this.minPanel = new JPanel(new BorderLayout());
