@@ -16,15 +16,19 @@ class MainTask : public Task
     int timeStandby;
     int timeCoffee;
     int pinButton;
+    int pinPotentiometer;
+    int sugarLevel;
     ButtonImpl *button;
+    PotentiometerImpl *regulator;
     int period;
     //dovremmo includere anche il potenziometro
 
   public:
-    MainTask(int pin);
+    MainTask(int pin , uint8_t analog);
     void init(int period);
     void tick();
     void energySaving();
+    void sugarRegulator();
     void checkMaintaince();
 };
 

@@ -3,7 +3,8 @@
 
 PirSensorImpl::PirSensorImpl(int pin){
   this->pin = pin;
-  pinMode(pin, INPUT);     
+  pinMode(pin, INPUT);    
+  delay(2000); // non so se va bene
 } 
   
 bool PirSensorImpl::isMoved(){
