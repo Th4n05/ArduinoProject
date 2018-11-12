@@ -4,6 +4,9 @@ public interface Model {
     
     void connectArduino() throws Exception;
     
-    void comunication() throws Exception;
+    String receiveStatus() throws Exception;    
+    
+    void rechargeCoffee(String msg) throws Exception;
 
+    
 }

@@ -7,6 +7,7 @@ class ModelImpl implements Model {
 
     private CommChannel channel;
 
+    @Override
     public void connectArduino() throws Exception {
         channel = new SerialCommChannel("/dev/cu.usbmodem1411", 9600);
         /* attesa necessaria per fare in modo che Arduino completi il reboot */
@@ -15,8 +16,16 @@ class ModelImpl implements Model {
         System.out.println("Ready.");
     }
 
-    public void comunication() throws Exception {  		
-    		channel.sendMsg("ok");
+    @Override
+    public String receiveStatus() throws Exception {
+
+        return channel.receiveMsg();
+
+    }
+
+    @Override
+    public void rechargeCoffee(String msg) throws Exception {
+        channel.sendMsg(msg);
     }
 
 }

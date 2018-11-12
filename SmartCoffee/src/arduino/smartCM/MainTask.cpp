@@ -139,7 +139,7 @@ void MainTask::tick()
       if (timeOn >= (DT1 * 1000))
       {
         state = 3;
-        MsgService.sendMsg("Welcome!");
+        MsgService.sendMsg('W');
       }
     }
     break;
@@ -155,7 +155,7 @@ void MainTask::tick()
     if (button->isPressed())
     {
       state = 5;
-      MsgService.sendMsg("Making a coffee");
+      MsgService.sendMsg('M');
       makeCoffee = true;
       timeCoffee = 0;
     }
@@ -182,7 +182,7 @@ void MainTask::tick()
     Serial.println("stato MAKECOFFEE");
     if (!makeCoffee)
     {                                            //vuol dire che il caffè è stato fatto.
-      MsgService.sendMsg("The coffee is ready"); // da guardare come mandare una volta sola con un flag
+      MsgService.sendMsg('R'); // da guardare come mandare una volta sola con un flag
       timeCoffee += period;
       if (timeCoffee <= (DT4 * 1000))
       {
@@ -203,7 +203,7 @@ void MainTask::tick()
 
   case 6:
     Serial.println("stato MAINTAINCE");
-    MsgService.sendMsg("No more coffee. Waiting for recharge"); // da guardare come mandare una volta sola con un flag
+    MsgService.sendMsg('N'); // da guardare come mandare una volta sola con un flag
     if (!maintaince)
     {
       if (state == 6)

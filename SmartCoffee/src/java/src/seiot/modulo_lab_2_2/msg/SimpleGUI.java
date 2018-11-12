@@ -13,10 +13,7 @@ import javax.swing.SwingConstants;
 
 public class SimpleGUI extends JFrame {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
+    private static final int NC = 10;
     private JPanel jp;
     private JButton jb;
     private JLabel title;
@@ -31,7 +28,7 @@ public class SimpleGUI extends JFrame {
         this.model = new ModelImpl();
         BorderLayout bl1 = new BorderLayout();
         this.jp = new JPanel(bl1);
-        this.jb = new JButton("Ricarica caffè");
+        this.jb = new JButton("Ricarica caffe'");
         this.title = new JLabel("Coffee Machine", SwingConstants.CENTER);
         this.text = new JLabel("Testo", SwingConstants.CENTER);
         this.text.setFont(new Font("Helvetica", Font.TYPE1_FONT, 20));
@@ -55,14 +52,34 @@ public class SimpleGUI extends JFrame {
         jb.addActionListener(e -> {
             text.setText("Stiamo ricaricando la macchina");
             try {
-				model.comunication();
-			} catch (Exception e1) {
-				e1.printStackTrace();
-			}
+                this.model.rechargeCoffee(String.valueOf(NC));
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
         });
+
     }
-    
-    public static void main(String[] args){
-        new SimpleGUI();
+
+    public void msgCicle() throws Exception {
+        while (true) {
+            String msg = this.model.receiveStatus();
+            if (msg.equals("M")) {
+                this.text.setText("Make Coffee.");
+            } else if (msg.equals("W")) {
+                this.text.setText("Welcome!");
+            } else if (msg.equals("R")) {
+                this.text.setText("Coffee is ready.");
+            } else if (msg.equals("N")) {
+                this.text.setText("No more coffee. Waiting for recharge");
+            } else {
+                this.bar.setValue(Integer.parseInt(msg));
+            }
+        }
+    }
+
+    public static void main(String[] args) throws Exception {
+        SimpleGUI gui = new SimpleGUI();
+        gui.msgCicle();
+
     }
 }
