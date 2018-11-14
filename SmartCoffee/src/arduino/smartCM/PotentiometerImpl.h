@@ -6,11 +6,9 @@
 class PotentiometerImpl : public Potentiometer {
  
 public: 
-  PotentiometerImpl(uint8_t pin);
+  PotentiometerImpl();
   int getValue();
 
-private:
-  uint8_t pin;
 };
 
 #endif

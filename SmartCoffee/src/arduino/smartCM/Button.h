@@ -4,7 +4,7 @@
 class Button {
  
 public: 
-  virtual bool isPressed() = 0;
+  virtual bool isPresse() = 0;
 };
 
 #endif

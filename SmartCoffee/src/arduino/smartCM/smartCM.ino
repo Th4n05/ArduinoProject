@@ -22,7 +22,7 @@ void setup()
   sched.init(50);
 
   Task *t0 = new MainTask(2);
-  t0->init(200); // da vedere se va bene come periodo
+  t0->init(150); // da vedere se va bene come periodo
   sched.addTask(t0);
 
   Task *t1 = new MakeCoffeeTask(10, 11, 12);

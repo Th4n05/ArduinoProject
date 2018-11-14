@@ -19,9 +19,9 @@ void MaintainceTask::tick()
         if (MsgService.isMsgAvailable())
         {
             Msg *msg = MsgService.receiveMsg();
-            NC = msg->getContent();
+            NC = msg->getContent().toInt();
             numCoffee += NC;
-            MsgService.sendMsg("Coffee refilled: %d", NC);
+            MsgService.sendMsg("C");
             delete msg;
             maintaince = false;
         }

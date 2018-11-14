@@ -1,15 +1,13 @@
 #include "PotentiometerImpl.h"
 #include "Arduino.h"
 
-PotentiometerImpl::PotentiometerImpl(uint8_t pin)
+PotentiometerImpl::PotentiometerImpl()
 {
-    this->pin = pin;
-    pinMode(pin, INPUT);
 }
 
-int PotentiometerImpl::isMoved()
+int PotentiometerImpl::getValue()
 {
-    float value = analogRead(pin);
+    float value = analogRead(A0);
     if (value >= 0 && value < 204)
     {
         return 0;

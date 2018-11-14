@@ -6,8 +6,6 @@ ButtonImpl::ButtonImpl(int pin){
   pinMode(pin, INPUT);     
 } 
   
-bool ButtonImpl::isPressed(){
+bool ButtonImpl::isPresse(){
   return digitalRead(pin) == HIGH;
 }
-
-
