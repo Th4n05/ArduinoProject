@@ -37,32 +37,6 @@ void MainTask::init(int period)
   numCoffee = 0;
 }
 
-/*void sugarRegulator()
-  {
-  int value = regulator->getValue();
-  if (value != sugarLevel)
-  {
-    sugarLevel = value;
-    MsgService.sendMsg(sugarLevel);
-  }
-  }
-
-  void energySaving()
-  {
-  Serial.println("Dormo");
-  set_sleep_mode(SLEEP_MODE_IDLE);
-  sleep_enable();
-
-  power_adc_disable();
-  power_spi_disable();
-  power_timer0_disable();
-  power_timer2_disable();
-  power_twi_disable();
-  sleep_mode();
-  sleep_disable();
-  power_all_enable();
-  Serial.println("Mi sveglio");
-  }*/
 
 void MainTask::tick()
 {
@@ -79,12 +53,6 @@ void MainTask::tick()
       {
         set_sleep_mode(SLEEP_MODE_IDLE);
         sleep_enable();
-
-        /* Disable all of the unused peripherals. This will reduce power
-                 consumption further and, more importantly, some of these
-                 peripherals may generate interrupts that will wake our Arduino from
-                 sleep!
-        */
         power_adc_disable();
         power_spi_disable();
         power_timer0_disable();
@@ -93,8 +61,7 @@ void MainTask::tick()
         /* Now enter sleep mode. */
         sleep_mode();
         /* The program will continue from here after the timer timeout*/
-        sleep_disable(); /* First thing to do is disable sleep. */
-        /* Re-enable the peripherals. */
+        sleep_disable(); 
         power_all_enable();
       }
       break;
@@ -232,14 +199,6 @@ void MainTask::tick()
         {
           state = 0;
         }
-        else
-        {
-          //Serial.println("ERRORE");
-        }
-      }
-      else
-      {
-        //Serial.println("Attendo ricarica");
       }
 
       break;
