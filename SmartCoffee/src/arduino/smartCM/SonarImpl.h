@@ -12,6 +12,8 @@ class SonarImpl : public Sonar
 
   private:
     int trigPin;
+    float averageDistance;
+    float alpha;
     int echoPin;
 };
 

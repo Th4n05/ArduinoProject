@@ -27,17 +27,14 @@ public class SimpleGUI extends JFrame {
     private JProgressBar bar;
     private JPanel minPanel;
     private SerialCommChannel channel;
-    // private Model model;
 
     public SimpleGUI() throws Exception {
 
         channel = new SerialCommChannel("/dev/cu.usbmodem1421", 9600);
-        /* attesa necessaria per fare in modo che Arduino completi il reboot */
 
         this.setSize((int) (getToolkit().getScreenSize().width * 0.5),
                 (int) (getToolkit().getScreenSize().height * 0.5));
-        // this.model = new ModelImpl();
-        // this.model.connectArduino();
+
         BorderLayout bl1 = new BorderLayout();
         this.jp = new JPanel(bl1);
         this.jb = new JButton("Ricarica caffe'");
