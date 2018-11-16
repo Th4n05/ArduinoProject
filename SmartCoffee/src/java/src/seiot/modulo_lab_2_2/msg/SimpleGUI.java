@@ -30,7 +30,7 @@ public class SimpleGUI extends JFrame {
 
     public SimpleGUI() throws Exception {
 
-        channel = new SerialCommChannel("/dev/cu.usbmodem1421", 9600);
+        channel = new SerialCommChannel("/dev/cu.usbmodem1411", 9600);
 
         this.setSize((int) (getToolkit().getScreenSize().width * 0.5),
                 (int) (getToolkit().getScreenSize().height * 0.5));
@@ -76,7 +76,6 @@ public class SimpleGUI extends JFrame {
 
         SimpleGUI gui = new SimpleGUI();
 
-
         while (true) {
             String msg = gui.channel.receiveMsg();
             msg = msg.trim();
@@ -90,6 +89,8 @@ public class SimpleGUI extends JFrame {
                 gui.text.setText("Coffee is ready.");
             } else if (msg.equals("N")) {
                 gui.text.setText("No more coffee. Waiting for recharge");
+            } else if (msg.equals("F")) {
+                gui.text.setText("");
             } else if (msg.equals("C")) {
                 gui.text.setText("Coffee refilled");
                 Thread.sleep(1000);

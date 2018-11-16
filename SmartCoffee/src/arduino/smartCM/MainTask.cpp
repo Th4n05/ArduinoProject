@@ -61,7 +61,7 @@ void MainTask::tick()
         /* Now enter sleep mode. */
         sleep_mode();
         /* The program will continue from here after the timer timeout*/
-        sleep_disable(); 
+        sleep_disable();
         power_all_enable();
       }
       break;
@@ -126,7 +126,7 @@ void MainTask::tick()
       {
         state = 5;
         MsgService.sendMsg("M");
-        
+
         makeCoffee = true;
         timeCoffee = 0;
       }
@@ -169,6 +169,7 @@ void MainTask::tick()
             else
             {
               state = 3;
+              MsgService.sendMsg("F");
             }
           }
         }
@@ -184,6 +185,8 @@ void MainTask::tick()
           else
           {
             state = 3;
+            MsgService.sendMsg("F");
+
           }
         }
       }
@@ -191,7 +194,7 @@ void MainTask::tick()
       break;
 
     case 6:
-      
+
       //Serial.println("stato MAINTAINCE");
       if (!maintaince)
       {
