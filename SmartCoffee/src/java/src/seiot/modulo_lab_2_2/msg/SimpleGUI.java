@@ -53,7 +53,7 @@ public class SimpleGUI extends JFrame {
         minPanel.add(bar, BorderLayout.CENTER);
         jp.add(minPanel, BorderLayout.CENTER);
         jp.add(jb, BorderLayout.SOUTH);
-
+        
         this.getContentPane().add(jp);
         this.setVisible(true);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -92,7 +92,7 @@ public class SimpleGUI extends JFrame {
             } else if (msg.equals("F")) {
                 gui.text.setText("");
             } else if (msg.equals("C")) {
-                gui.text.setText("Coffee refilled");
+                gui.text.setText("Coffee refilled: " + NC+" coffee.");
                 Thread.sleep(1000);
                 gui.text.setText("");
             } else {
