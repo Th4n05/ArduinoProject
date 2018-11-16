@@ -38,7 +38,7 @@ void setup()
   sched.addTask(t3);
 
   Task *t4 = new MaintainceTask();
-  t4->init(200); // da vedere se va bene come periodo
+  t4->init(100); // da vedere se va bene come periodo
   sched.addTask(t4);
 }
 
