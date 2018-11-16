@@ -19,6 +19,17 @@ Siamo partiti ragionando che avremmo avuto più task, ognuno dei quali eseguito 
 
 \item {Maintenance Task}:
 
+Questo task gestisce gestisce lo scambio dei messaggi con la piattaforma realizzata su java attraverso la comunicazione seriale.
+
+Tale task viene eseguito quando il sistema realizzato entra nello stato di MAINTENANCE. Tale variazione di stato viene espressa attraverso il set della variabile condivisa maintenance.
+A questo punto il task controlla si mette in ascolto di messaggi in arrivo sulla seriale, in quanto attende il messaggio di ricarica che verrà inviato lato java, per effettuare la ricarica del caffè.
+
+Tale messaggio contiene un stringa indicante il numero di caffè con cui ricaricare la macchina. Questo dato viene convertito in un intero e sommato alla variabile condivisa che tiene traccia dei caffè da poter fare.
+
+Il messaggio ricevuto viene poi cancellato, in quanto Arduino non contiene il garbage collector, portando alla saturazione di memoria dopo pochi cicli di esecuzione.
+E la variabile maintenance viene rosetta e si esce dallo stato di MAINTENANCE.
+
+
 
 \item {MakeCoffee Task}:
 
