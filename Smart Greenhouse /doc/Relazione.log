@@ -209,4 +209,26 @@ LaTeX Warning: File `MovementTask.png' not found on input line 50.
 
 See the pdftex.def package documentation for explanation.
 Type  H <return>  for immediate help.
- ...               
+ ...                                              
+                                                  
+l.50 ...degraphics[scale = 0.60]{MovementTask.png}
+                                                  
+? 
+./Relazione.tex:50: Emergency stop.
+ ...                                              
+                                                  
+l.50 ...degraphics[scale = 0.60]{MovementTask.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+ 
+Here is how much of TeX's memory you used:
+ 2753 strings out of 492649
+ 36886 string characters out of 6129622
+ 210599 words of memory out of 5000000
+ 6611 multiletter control sequences out of 15000+600000
+ 8262 words of font info for 20 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 41i,4n,25p,793b,234s stack positions out of 5000i,500n,10000p,200000b,80000s
+./Relazione.tex:50:  ==> Fatal error occurred, no output PDF file produced!
