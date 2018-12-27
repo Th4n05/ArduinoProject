@@ -2,6 +2,7 @@
 #define __HUMIDITYSENSORIMPL__
 
 #include "HumiditySensor.h"
+#include "DHT.h"
 
 class HumiditySensorImpl : public HumiditySensor {
  
@@ -11,7 +12,6 @@ public:
 
 private:
   int hPin;
-  int readData;
 };
 
 #endif

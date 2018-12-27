@@ -1,14 +1,20 @@
 #include "HumiditySensorImpl.h"
 #include "Arduino.h"
-#include <dht.h>
+#include "DHT.h"
+
+
+#define DHTTYPE DHT11
+
+
 
 HumiditySensorImpl::HumiditySensorImpl(int pin)
 {
     this->hPin = pin;
+    //sarebbe bello dichiarare direttamente qui il DHT ma se lo metto qui non lo trova nella funzione sottostante
 }
 
-int HumiditySensorImpl::getValue()
+float HumiditySensorImpl::getValue()
 {
-    int readData = DHT.read22(hPin); // Reads the data from the sensor
-    return DHT.humidity; 
+    DHT dht(hPin, DHTTYPE);
+    return dht.readHumidity();
 }

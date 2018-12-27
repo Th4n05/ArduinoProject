@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="jSSC-2.8.0-Release/javadoc/jssc-2.8.0-javadoc.jar"/>
+	<classpathentry kind="lib" path="jSSC-2.8.0-Release/jssc.jar"/>
+	<classpathentry kind="lib" path="jSSC-2.8.0-Release/src/jssc-2.8.0-src.jar"/>
+	<classpathentry kind="lib" path="lib/jackson-annotations-2.9.7.jar"/>
+	<classpathentry kind="lib" path="lib/jackson-core-2.9.7.jar"/>
+	<classpathentry kind="lib" path="lib/jackson-databind-2.9.7.jar"/>
+	<classpathentry kind="lib" path="lib/netty-all-4.1.31.Final.jar"/>
+	<classpathentry kind="lib" path="lib/vertx-core-3.5.4.jar"/>
+	<classpathentry kind="lib" path="lib/vertx-web-3.5.4.jar"/>
+	<classpathentry kind="lib" path="lib/vertx-web-client-3.5.4.jar"/>
+	<classpathentry kind="lib" path="rxtx-2.2-dist/linux-i386/RXTXcomm.jar"/>
+	<classpathentry kind="lib" path="rxtx-2.2-dist/linux-x64/RXTXcomm.jar"/>
+	<classpathentry kind="lib" path="rxtx-2.2-dist/mac_osx/RXTXcomm.jar"/>
+	<classpathentry kind="lib" path="rxtx-2.2-dist/win-x64/RXTXcomm.jar"/>
+	<classpathentry kind="lib" path="rxtx-2.2-dist/win-x86/RXTXcomm.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
