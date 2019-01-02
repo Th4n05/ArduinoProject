@@ -1,4 +1,4 @@
-package seiot.modulo_lab_4_1;
+package seiot;
 
 class DataPoint {
 	private double value;

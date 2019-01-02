@@ -1,4 +1,4 @@
-package seiot.modulo_lab_4_1;
+package seiot;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Vertx;
@@ -60,7 +60,7 @@ public class DataService extends AbstractVerticle {
 				values.removeLast();
 			}
 			
-			log("Humidity: " + value + "% from " + place + " on " + new Date(time));
+			log("New value: " + value + " from " + place + " on " + new Date(time));
 			response.setStatusCode(200).end();
 		}
 	}
