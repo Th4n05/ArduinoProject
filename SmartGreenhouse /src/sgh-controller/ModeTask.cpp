@@ -1,27 +1,37 @@
 #include "ModeTask.h"
 #include "Arduino.h"
-#include "DistanceTask.h"
+#include "config.h"
+#include "Logger.h"
 
 
-const float DIST1 = 0.3;
+ModeTask::ModeTask(SharedState* pSharedState){
+  this->pSharedState = pSharedState;
+}
 
-
-MainTask::MainTask(){}
-
-void MainTask::init(int period)
+void ModeTask::init(int period)
 {
   Task::init(period);
   this->period = period;
+  this->L1 = new Led(L1_PIN);
+  this->LM = new Led(LM_PIN);
+  L1->switchOn();
 
 }
 
 
-void MainTask::tick()
+void ModeTask::tick()
 {
-  if(distance <= DIST1)
+  if(pSharedState->getDistance() <= DIST && pSharedState->isConnected())
   {
-    manualMode = true;
+    pSharedState->setManualMode();
+    LM->switchOn();
+    L1->switchOff();
+    Logger.log("ModeTask->Manual Mode");
   }else{
-    manualMode = false;
+    pSharedState->setAutoMode();
+    pSharedState->setFinishConnection();
+    Logger.log("ModeTask->Automatic Mode");
+    LM->switchOff();
+    L1->switchOn();
   }
 }

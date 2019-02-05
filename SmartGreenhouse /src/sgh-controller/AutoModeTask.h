@@ -3,18 +3,20 @@
 
 #include "Task.h"
 #include "Led.h"
+#include "SharedState.h"
 
 
-extern bool irrigation;
 
 class AutoModeTask: public Task {
 
-  int ledPin;
-  Led* L1;
+    SharedState* pSharedState;
+    Led* L2;
+    enum { IDLE, CHOOSE, WAIT, ERROR } state;
+    int erogationTime;
 
   public:
 
-    AutoModeTask(int pin);
+    AutoModeTask(SharedState* pState);
     void init(int period);
     void tick();
 };

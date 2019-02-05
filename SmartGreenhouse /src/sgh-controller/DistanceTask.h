@@ -3,19 +3,19 @@
 
 #include "Task.h"
 #include "SonarImpl.h"
-
-extern float distance;
+#include "SharedState.h"
 
 
 class DistanceTask: public Task {
 
+    SharedState* pSharedState;
     int echoPin;
     int trigPin;
     SonarImpl* sonar;
 
   public:
 
-    DistanceTask(int echo, int trig);
+    DistanceTask(SharedState* pState, int echo, int trig);
     void init(int period);
     void tick();
 };

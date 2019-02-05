@@ -1,40 +1,44 @@
 #ifndef __CONFIG__
 #define __CONFIG__
 
+
+/* HARDWARE PIN */
 #define PROX_TRIG_PIN 7
 #define PROX_ECHO_PIN 8
-#define PRES_PIN 2
+#define BLUETOOTH_RX_PIN 0
+#define BLUETOOTH_TX_PIN 1
 
-#define POT_PIN A0
 
-/* make coffee button */
-#define T1_PIN 6
+/* servo motor */
+#define SERVO_PIN 9
 
-/* progress bar leds */
-#define L1_PIN 3
-#define L2_PIN 5
-#define L3_PIN 11
+/* modality led */
+#define L1_PIN 11
+#define L2_PIN 12
+#define LM_PIN 13
 
-/* time to make a coffee */
-#define DT3 10000
+/* SOFTWARE COSTANT */
 
-/* proximity timeout  */
-#define DT2A 5000
+/* minimum value of humidity */
+#define U_MIN 0.3
 
-/* out of distance timeout */
-#define DT2B 5000
+/* delta for humidity  */
+#define DELTA_U 0.05
 
-/* timeout for getting the coffee */
-#define DT4 15000
+/* max time of erogation */
+#define T_MAX 5000
 
-/* welcome distance */
-#define DIST1 0.30
 
-/* grab coffee distance*/
-#define DIST2 0.10
+// SARANNO DA METTERE I GIUSTI VALORI PER MUOVERE IL MOTORE SERVO_PIN
 
-#define MAX_NUM_COFFEE 5
+/* minimum flow of pump*/
+#define P_MIN 1
 
-#define INIT_SUGAR_LEVEL 100
+/* medium flow of pump*/
+#define P_MED 2
+
+/* maximum flow of pump*/
+#define P_MAX 
+3
 
 #endif

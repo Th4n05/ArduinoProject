@@ -2,19 +2,20 @@
 #define __MODETASK__
 
 #include "Task.h"
+#include "SharedState.h"
+#include "Led.h"
 
-
-extern bool manualMode;
-
-
-class MainTask : public Task
+class ModeTask : public Task
 {
-    int period;
+  SharedState* pSharedState;
+  Led* LM;
+  Led* L1;
+  int period;
 
-  public:
-    MainTask();
-    void init(int period);
-    void tick();
+public:
+  ModeTask(SharedState* pState);
+  void init(int period);
+  void tick();
 };
 
 #endif

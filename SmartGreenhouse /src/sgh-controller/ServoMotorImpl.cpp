@@ -1,6 +1,6 @@
 #include "ServoMotorImpl.h"
 #include "Arduino.h"
-
+/*
 ServoMotorImpl::ServoMotorImpl(int pin){
   this->pin = pin;  
 } 
@@ -15,4 +15,4 @@ void ServoMotorImpl::setPosition(int angle){
 
 void ServoMotorImpl::off(){
   motor.detach();    
-}
+}*/

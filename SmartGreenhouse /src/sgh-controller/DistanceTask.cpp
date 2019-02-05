@@ -1,7 +1,8 @@
 #include "DistanceTask.h"
 #include "Arduino.h"
 
-DistanceTask::DistanceTask(int trig, int echo){
+DistanceTask::DistanceTask( SharedState* pSharedState ,int echo, int trig){
+  this->pSharedState = pSharedState;
   this->echoPin = echo;    
   this->trigPin = trig;    
 }
@@ -12,5 +13,5 @@ void DistanceTask::init(int period){
 }
   
 void DistanceTask::tick(){
-  distance = sonar->getDistance();  
+  pSharedState->setDistance(sonar->getDistance());  
 }
