@@ -26,11 +26,11 @@ void ModeTask::tick()
     pSharedState->setManualMode();
     LM->switchOn();
     L1->switchOff();
-    Logger.log("ModeTask->Manual Mode");
+    //Logger.log("ModeTask->Manual Mode");
   }else{
     pSharedState->setAutoMode();
     pSharedState->setFinishConnection();
-    Logger.log("ModeTask->Automatic Mode");
+    //Logger.log("ModeTask->Automatic Mode");
     LM->switchOff();
     L1->switchOn();
   }

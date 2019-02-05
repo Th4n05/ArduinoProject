@@ -1,8 +1,9 @@
-#ifndef __SERVOMOTORIMPL__
-#define __SERVOMOTORIMPL__
+#ifndef __SERVO_MOTOR_IMPL__
+#define __SERVO_MOTOR_IMPL__
 
-/*#include "ServoMotor.h"
-#include <Servo.h>
+#include "servo_motor.h"
+#include "Arduino.h"
+#include "ServoTimer2.h"
 
 class ServoMotorImpl: public ServoMotor {
 
@@ -15,7 +16,7 @@ public:
     
 private:
   int pin; 
-  Servo motor; 
+  ServoTimer2 motor; 
 };
-*/
+
 #endif

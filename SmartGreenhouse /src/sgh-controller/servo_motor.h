@@ -1,5 +1,5 @@
-#ifndef __SERVOMOTOR__
-#define __SERVOMOTOR__
+#ifndef __SERVO_MOTOR__
+#define __SERVO_MOTOR__
 
 class ServoMotor {
 

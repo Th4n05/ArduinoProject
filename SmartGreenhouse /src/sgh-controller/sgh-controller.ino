@@ -2,10 +2,11 @@
 #include "config.h"
 #include "MsgService.h"
 #include "DistanceTask.h"
+#include "IrrigationTask.h"
+#include "AutoModeTask.h"
 #include "ModeTask.h"
 
 Scheduler sched;
-SharedState *pSharedState = new SharedState();
 
 void setup()
 {
@@ -13,6 +14,7 @@ void setup()
   sched.init(50);
 
   MsgService.init();
+  SharedState *pSharedState = new SharedState();
 
   /*PresenceSensor* pPres = new Pir(PRES_PIN);
     ProximitySensor* pProx = new Sonar(PROX_ECHO_PIN, PROX_TRIG_PIN);
@@ -30,20 +32,19 @@ void setup()
   sched.addTask(t0);
 
   Task *t1 = new ModeTask(pSharedState);
-  t1->init(50);
+  t1->init(100);
   sched.addTask(t1);
 
   Task *t2 = new AutoModeTask(pSharedState);
   t2->init(50);
   sched.addTask(t2);
 
-  /*Task *t3 = new ManageSugarTask(pSharedState, pPot, pUserConsole);
-    t3->init(100);
-    sched.addTask(t3);*/
+  Task *t3 = new IrrigationTask(pSharedState);
+  t3->init(150);
+  sched.addTask(t3);
 }
 
 void loop()
 {
   sched.schedule();
-  MsgService.sendMsg(String(pSharedState->isAutoMode()));
 }

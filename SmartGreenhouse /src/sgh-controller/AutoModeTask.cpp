@@ -15,50 +15,58 @@ void AutoModeTask::init(int period)
   L2->switchOff();
   erogationTime = 0;
   state = IDLE;
+  this->period = period;
 }
 
 void AutoModeTask::tick()
 {
-  if (pSharedState->isAutoMode)
+
+  if (pSharedState->isAutoMode())
   {
-
-    if (pSharedState->getHumidity() < U_MIN && state == IDLE)
+    switch (state)
     {
-      state = CHOOSE;
-      Logger.log("AutoModeTask->State Choosen");
-
-    }
-
-    if (state == CHOOSE && pSharedState->getFlow() == 0)
-    {
-      if (pSharedState->getHumidity() <= 30 && pSharedState->getHumidity() > 20)
+    case IDLE:
+      if (pSharedState->getHumidity() < U_MIN)
       {
-        pSharedState->setFlow(P_MIN);
+        state = CHOOSE;
+        Logger.log("AutoModeTask->State Choosen");
       }
-      else if (pSharedState->getHumidity() <= 20 && pSharedState->getHumidity() > 10)
+      break;
+
+    case CHOOSE:
+      if (pSharedState->getFlow() == P_CLOSE)
       {
-        pSharedState->setFlow(P_MED);
-      }
-      else if (pSharedState->getHumidity() <= 10 && pSharedState->getHumidity() >= 0)
-      {
-        pSharedState->setFlow(P_MAX);
+        if (pSharedState->getHumidity() <= 30 && pSharedState->getHumidity() > 20)
+        {
+          pSharedState->setFlow(P_MIN);
+          Logger.log("AutoModeTask->SetFLow PMIN");
+        }
+        else if (pSharedState->getHumidity() <= 20 && pSharedState->getHumidity() > 10)
+        {
+          pSharedState->setFlow(P_MED);
+          Logger.log("AutoModeTask->SetFLow PMED");
+        }
+        else if (pSharedState->getHumidity() <= 10 && pSharedState->getHumidity() >= 0)
+        {
+          pSharedState->setFlow(P_MAX);
+          Logger.log("AutoModeTask->SetFLow PMAX");
+        }
+        state = WAIT;
+        Logger.log("AutoModeTask->Wait");
+        L2->switchOn();
       }
       else
       {
-        // qui si potrebbe aggiungere una segnalazione di malfunzionamento del sensore
+        Logger.log("AutoModeTask->Flow già settato non si sa dove");
       }
-      state = WAIT;
-      Logger.log("AutoModeTask->Wait");
-      L2->switchOn();
-    }
+      break;
 
-    if (state == WAIT)
-    {
+    case WAIT:
       erogationTime += period;
       if (pSharedState->getHumidity() > (U_MIN + DELTA_U))
       {
         state = IDLE;
-        pSharedState->setFlow(0);
+        pSharedState->setFlow(P_CLOSE);
         Logger.log("ModeTask->Idle");
         erogationTime = 0;
         L2->switchOff();
@@ -66,19 +74,18 @@ void AutoModeTask::tick()
       if (erogationTime > T_MAX)
       {
         state = ERROR;
-        Logger.log("ModeTask->Error");
-        pSharedState->setFlow(0);
+        Logger.log("AutoModeTask->Error");
+        pSharedState->setFlow(P_CLOSE);
         erogationTime = 0;
         L2->switchOff();
       }
-    }
+      break;
 
-    if (state == ERROR)
-    {
+    case ERROR:
       // QUI BISOGNA MANDARE LA SEGNALAZIONE DELL'ERRORE
       state = IDLE;
-      Logger.log("ModeTask->Idle");
+      Logger.log("AutoModeTask->Idle");
+      break;
     }
   }
-}
 }

@@ -13,6 +13,7 @@ class AutoModeTask: public Task {
     Led* L2;
     enum { IDLE, CHOOSE, WAIT, ERROR } state;
     int erogationTime;
+    int period;
 
   public:
 

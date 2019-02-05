@@ -7,9 +7,9 @@ class SharedState
 private:
   bool autoMode;
   bool btConnection;
-  float flow;
+  int flow;
   float distance;
-  float humdity;
+  float humidity;
   bool pumping;
 
 public:
@@ -17,9 +17,9 @@ public:
   {
     autoMode = true;
     btConnection = false;
-    flow = 0;
+    flow = 30;
     distance = 0;
-    humdity = 0;
+    humidity = 25;
     pumping = false;
   }
 
@@ -31,11 +31,11 @@ public:
   void setConnection() { btConnection = true; }
   void setFinishConnection() { btConnection = false; }
 
-  float getFlow() { return flow; }
-  void setFlow(float value) { flow = value; }
+  int getFlow() { return flow; }
+  void setFlow(int value) { flow = value; }
 
-  float getHumidity() { return flow; }
-  void setHumidity(float value) { humdity = value; }
+  float getHumidity() { return humidity; }
+  void setHumidity(float value) { humidity = value; }
 
   float getDistance() { return distance; }
   void setDistance(float value) { distance = value; }
