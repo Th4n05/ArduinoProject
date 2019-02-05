@@ -4,6 +4,7 @@
 #include "DistanceTask.h"
 #include "IrrigationTask.h"
 #include "AutoModeTask.h"
+#include "HumidityTask.h"
 #include "ModeTask.h"
 
 Scheduler sched;
@@ -42,6 +43,10 @@ void setup()
   Task *t3 = new IrrigationTask(pSharedState);
   t3->init(150);
   sched.addTask(t3);
+
+  Task *t4 = new HumidityTask(pSharedState);
+  t4->init(50);
+  sched.addTask(t4);
 }
 
 void loop()

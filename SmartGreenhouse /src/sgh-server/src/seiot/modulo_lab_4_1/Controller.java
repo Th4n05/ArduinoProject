@@ -11,12 +11,10 @@ public class Controller implements ActionListener {
 	static final String MSG_STOP  				= "2";
 
 	SerialCommChannel channel;
-	SmartCMView view;
 	
-	public Controller(String port, SmartCMView view, LogView logger) throws Exception {
-		this.view = view;
+	public Controller(String port, LogView logger) throws Exception {
 		channel = new SerialCommChannel(port,9600);		
-		new MonitoringAgent(channel,view,logger).start();
+		new MonitoringAgent(channel,logger).start();
 			
 		/* attesa necessaria per fare in modo che Arduino completi il reboot */
 		

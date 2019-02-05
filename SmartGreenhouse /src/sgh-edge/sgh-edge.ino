@@ -8,7 +8,7 @@ char* ssidName = "iPhone di Enrico";
 /* WPA2 PSK password */
 char* pwd = "8au14zwz2cqzb";
 /* service IP address */ 
-char* address = "http://f2a148bc.ngrok.io";
+char* address = "http://fbe72c24.ngrok.io";
 HumiditySensorImpl* humSensor;
 
 

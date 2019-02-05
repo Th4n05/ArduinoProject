@@ -21,7 +21,7 @@ class SmartCMConsole   {
 		Controller contr = new Controller(portName,view,log);
 		view.registerController(contr);
 		SwingUtilities.invokeLater(() -> {
-			view.setVisible(true);
+			//view.setVisible(true);
 			log.setVisible(true);
 		});
 	}
