@@ -9,7 +9,8 @@ import io.vertx.ext.web.Router;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.BodyHandler;
 import seiot.modulo_lab_2_2.msg.jssc.SerialCommChannel;
-
+import java.sql.*;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
 
@@ -22,13 +23,21 @@ public class DataService extends AbstractVerticle {
     private static final int MAX_SIZE = 10;
     static LogView logger = null;
 
+    private String myDriver;
+    private String myUrl;
+    private Connection conn;
+
     private LinkedList<DataPoint> values;
-    private static SerialCommChannel channel;
+    //private static SerialCommChannel channel;
 
     public DataService(int port) throws Exception {
         values = new LinkedList<>();
         this.port = port;
-        channel = new SerialCommChannel("/dev/cu.usbmodem14101", 9600);
+        //channel = new SerialCommChannel("/dev/cu.usbmodem14101", 9600);
+        myDriver = "org.gjt.mm.mysql.Driver";
+        myUrl = "jdbc:mysql://localhost/sgh";
+        Class.forName(myDriver);
+        conn = DriverManager.getConnection(myUrl, "root", "");
     }
 
     @Override
@@ -38,10 +47,10 @@ public class DataService extends AbstractVerticle {
         router.post("/api/data").handler(this::handleAddNewData);
         router.get("/api/data").handler(this::handleGetData);
         vertx.createHttpServer().requestHandler(router::accept).listen(port);
-        System.out.println("Waiting Arduino for rebooting...");
+        /*System.out.println("Waiting Arduino for rebooting...");
         System.out.println("Ready.");
         logger = new LogView();
-        logger.setVisible(true);
+        logger.setVisible(true);*/
 
         log("Service ready.");
     }
@@ -64,11 +73,28 @@ public class DataService extends AbstractVerticle {
 
             log("Humidity: " + value + "% from " + place + " on " + new Date(time));
             try {
-                value -= 50;
+                // the mysql insert statement
+                String query = " insert into dati (type, value, time)" + " values ( ?, ?, ?)";
+
+                // create the mysql insert preparedstatement
+                PreparedStatement preparedStmt = conn.prepareStatement(query);
+                preparedStmt.setString(1, "H");
+                preparedStmt.setFloat(2, value);
+                preparedStmt.setDate(3, (java.sql.Date) new Date(time));
+
+                // execute the preparedstatement
+                preparedStmt.execute();
+
+                conn.close();
+            } catch (Exception e) {
+                System.err.println("Got an exception!");
+                System.err.println(e.getMessage());
+            }
+            /*try {
                 channel.sendMsg(String.valueOf(value));
             } catch (Exception e1) {
                 e1.printStackTrace();
-            }
+            }*/
             response.setStatusCode(200).end();
         }
     }
@@ -94,18 +120,13 @@ public class DataService extends AbstractVerticle {
     }
 
     public static void main(String[] args) throws Exception {
-        
         Vertx vertx = Vertx.vertx();
-        DataService service = new DataService(8080);
+        DataService service = new DataService(8000);
         vertx.deployVerticle(service);
-        Thread.sleep(2000);
-        while (true){
-            try {
-                String msg = channel.receiveMsg();
-                    logger.log(msg);
-            } catch (Exception ex){
-                ex.printStackTrace();
-            }
-        }
-    } 
+        //Thread.sleep(1000);
+        /*
+         * while (true){ try { String msg = channel.receiveMsg(); logger.log(msg); }
+         * catch (Exception ex){ ex.printStackTrace(); } }
+         */
+    }
 }

@@ -15,6 +15,7 @@ void setup()
   sched.init(50);
 
   MsgService.init();
+  MsgServiceBT.init();
   SharedState *pSharedState = new SharedState();
 
   /*PresenceSensor* pPres = new Pir(PRES_PIN);
