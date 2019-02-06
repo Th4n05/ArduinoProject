@@ -14,14 +14,24 @@ import java.util.Date;
 public class JavaMysqlPreparedStatementInsertExample {
 
     public static void main(String[] args) {
-        try {
-            // create a mysql database connection
-            //String myDriver = "com.mysql.jdbc.Driver";
-            String myUrl = "jdbc:mysql://localhost/sgh";
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
-            Connection conn = DriverManager.getConnection(myUrl, "root", "");
+        //String driver = "com.mysql.jdbc.Driver";
+        String dbUri = "jdbc:mysql://localhost/sgh";
+        String userName = "root";
+        String password = "";
 
-            // create a sql date object so we can use it in our INSERT statement
+        Connection connection = null;
+        try {
+            //System.out.println("DataSource.getConnection() driver = " + driver);
+            //Class.forName(driver);
+            System.out.println("DataSource.getConnection() dbUri = " + dbUri);
+            connection = DriverManager.getConnection(dbUri, userName, password);
+        } catch (Exception e) {
+            new Exception(e.getMessage());
+            System.out.println("Errore" + e.getMessage());
+        }
+
+        try {
+            System.out.println("va");
             Calendar calendar = Calendar.getInstance();
             java.sql.Date startDate = new java.sql.Date(calendar.getTime().getTime());
 
@@ -29,17 +39,18 @@ public class JavaMysqlPreparedStatementInsertExample {
             String query = " insert into dati (type, value, time)" + " values ( ?, ?, ?)";
 
             // create the mysql insert preparedstatement
-            PreparedStatement preparedStmt = conn.prepareStatement(query);
+            PreparedStatement preparedStmt = connection.prepareStatement(query);
             preparedStmt.setString(1, "H");
             preparedStmt.setFloat(2, 50);
             preparedStmt.setDate(3, startDate);
 
             // execute the preparedstatement
+            System.out.println("va");
             preparedStmt.execute();
 
-            conn.close();
+            connection.close();
         } catch (Exception e) {
-            //System.err.println("Got an exception!");
+            System.err.println("Got an exception!");
             System.out.println(e);
         }
     }

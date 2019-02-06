@@ -17,5 +17,9 @@
 	<classpathentry kind="lib" path="rxtx-2.2-dist/mac_osx/RXTXcomm.jar"/>
 	<classpathentry kind="lib" path="rxtx-2.2-dist/win-x64/RXTXcomm.jar"/>
 	<classpathentry kind="lib" path="rxtx-2.2-dist/win-x86/RXTXcomm.jar"/>
+	<classpathentry kind="lib" path="/Users/enricognagnarella/Downloads/com.mysql.jdbc_5.1.5.jar"/>
+	<classpathentry kind="lib" path="/Users/enricognagnarella/Google Drive/Università/2° Anno/2° Semestre/Basi di Dati/Laboratorio/BD_Es1/lib/jtds-1.3.1.jar"/>
+	<classpathentry kind="lib" path="/Users/enricognagnarella/Google Drive/Università/2° Anno/2° Semestre/Basi di Dati/Laboratorio/BD_Es1/lib/mysql-connector-java-5.1.16-bin.jar"/>
+	<classpathentry kind="lib" path="/Users/enricognagnarella/Google Drive/Università/2° Anno/2° Semestre/Basi di Dati/Laboratorio/BD_Es1/lib/sqljdbc4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
