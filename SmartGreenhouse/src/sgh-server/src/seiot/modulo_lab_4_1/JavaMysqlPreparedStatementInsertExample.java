@@ -15,7 +15,7 @@ public class JavaMysqlPreparedStatementInsertExample {
 
     public static void main(String[] args) {
         //String driver = "com.mysql.jdbc.Driver";
-        String dbUri = "jdbc:mysql://localhost/sgh";
+        String dbUri = "jdbc:mysql://localhost:3306/sgh";
         String userName = "root";
         String password = "";
 
