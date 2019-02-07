@@ -37,6 +37,7 @@ public class MonitoringAgent extends Thread {
                     try {
                         Calendar calendar = Calendar.getInstance();
                         java.sql.Date startDate = new java.sql.Date(calendar.getTime().getTime());
+                        Timestamp timestamp = new Timestamp(startDate.getTime());
 
                         // the mysql insert statement
                         String query = " insert into dati (type, value, time)" + " values ( ?, ?, ?)";
@@ -45,7 +46,7 @@ public class MonitoringAgent extends Thread {
                         PreparedStatement preparedStmt = conn.prepareStatement(query);
                         preparedStmt.setString(1, "I");
                         preparedStmt.setString(2, time);
-                        preparedStmt.setDate(3, startDate);
+                        preparedStmt.setTimestamp(3, timestamp);
 
                         // execute the preparedstatement
                         preparedStmt.execute();
@@ -60,6 +61,7 @@ public class MonitoringAgent extends Thread {
                     try {
                         Calendar calendar = Calendar.getInstance();
                         java.sql.Date startDate = new java.sql.Date(calendar.getTime().getTime());
+                        Timestamp timestamp = new Timestamp(startDate.getTime());
 
                         // the mysql insert statement
                         String query = " insert into dati (type, value, time)" + " values ( ?, ?, ?)";
@@ -68,7 +70,7 @@ public class MonitoringAgent extends Thread {
                         PreparedStatement preparedStmt = conn.prepareStatement(query);
                         preparedStmt.setString(1, "E");
                         preparedStmt.setString(2, segnalation);
-                        preparedStmt.setDate(3, startDate);
+                        preparedStmt.setTimestamp(3, timestamp);
 
                         // execute the preparedstatement
                         preparedStmt.execute();
