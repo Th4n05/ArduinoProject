@@ -17,9 +17,9 @@ class SmartCMConsole {
         SwingUtilities.invokeAndWait(() -> {
             log = new LogView();
         });
-        String portName = "/dev/cu.usbmodem14201";
+        String portName = "COM7";
         String driver = "com.mysql.jdbc.Driver";
-        String dbUri = "jdbc:mysql://127.0.0.0:3306/sgh";
+        String dbUri = "jdbc:mysql://localhost:3306/sgh";
         String userName = "root";
         String password = "";
 
@@ -41,7 +41,7 @@ class SmartCMConsole {
         Controller contr = new Controller(portName, /* view, */log, connection);
 
         Vertx vertx = Vertx.vertx();
-        DataService service = new DataService(8080, contr);
+        DataService service = new DataService(8000, contr);
         vertx.deployVerticle(service);
         // view.registerController(contr);
         SwingUtilities.invokeLater(() -> {
