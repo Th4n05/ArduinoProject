@@ -1,63 +1,86 @@
 package seiot.modulo_lab_4_1;
 
-import seiot.modulo_lab_2_2.msg.*;
+import java.sql.*;
+import java.util.Calendar;
 import seiot.modulo_lab_2_2.msg.jssc.*;
 
 public class MonitoringAgent extends Thread {
 
-	SerialCommChannel channel;
-	SmartCMView view;
-	LogView logger;
-	
-	static final String CM_PREFIX 	=  "cm:";
-	static final String LOG_PREFIX 	=  "lo:";
-	static final String MSG_WELCOME 			= "we";
-	static final String MSG_SLEEPING 		= "zz";
-	static final String MSG_READY 			= "ok";
-	static final String MSG_MAKING_COFFEE 	= "mc";
-	static final String MSG_COFFEE_READY   	= "re";
-	static final String MSG_SUGAR_LEVEL   	= "s|";
-	static final String MSG_REFILLED   		= "f|";
-	static final String MSG_MAINTENANCE  	= "ma";
-	
-	public MonitoringAgent(SerialCommChannel channel, SmartCMView view, LogView log) throws Exception {
-		this.view = view;
-		this.logger = log;
-		this.channel = channel;
-	}
-	
-	public void run(){
-		while (true){
-			try {
-				String msg = channel.receiveMsg();
-				if (msg.startsWith(CM_PREFIX)){
-					String cmd = msg.substring(CM_PREFIX.length()); 
-					logger.log("new command: "+cmd);				
-					if (cmd.startsWith(MSG_WELCOME)){
-						view.setInfo("Welcome!");
-					} else if (cmd.startsWith(MSG_SLEEPING)){
-						view.setInfo("zzZZzz");
-					} else if (cmd.startsWith(MSG_READY)){
-						view.setInfo("Ready");
-					} else if (cmd.startsWith(MSG_MAKING_COFFEE)) {
-						view.setInfo("Making a coffee");
-					} else if (cmd.startsWith(MSG_COFFEE_READY)) {
-						view.setInfo("The coffee is ready");
-					} else if (cmd.startsWith(MSG_SUGAR_LEVEL)) {
-						view.updateSugarLevel(Integer.parseInt(cmd.substring(2)));
-					} else if (cmd.startsWith(MSG_MAINTENANCE)) {
-						view.setInfo("No more coffee. Waiting for recharge");
-						view.startMaintenance();
-					} else if (cmd.startsWith(MSG_REFILLED)) {
-						view.refilled(Integer.parseInt(cmd.substring(2)));
-					}
-				} else if (msg.startsWith(LOG_PREFIX)){
-					this.logger.log(msg.substring(LOG_PREFIX.length()));
-				}
-			} catch (Exception ex){
-				ex.printStackTrace();
-			}
-		}
-	}
+    SerialCommChannel channel;
+    LogView logger;
+    Connection conn;
+
+    static final String IRR_PREFIX = "ir:";
+    static final String LOG_PREFIX = "lo:";
+    static final String ERROR_PREFIX = "er:";
+    /*
+     * static final String MSG_WELCOME = "we"; static final String MSG_SLEEPING =
+     * "zz"; static final String MSG_READY = "ok"; static final String
+     * MSG_MAKING_COFFEE = "mc"; static final String MSG_COFFEE_READY = "re"; static
+     * final String MSG_SUGAR_LEVEL = "s|"; static final String MSG_REFILLED = "f|";
+     * static final String MSG_MAINTENANCE = "ma";
+     */
+
+    public MonitoringAgent(SerialCommChannel channel, /* SmartCMView view, */ LogView log, Connection conn)
+            throws Exception {
+        this.logger = log;
+        this.channel = channel;
+        this.conn = conn;
+    }
+
+    public void run() {
+        while (true) {
+            try {
+                String msg = channel.receiveMsg();
+                if (msg.startsWith(IRR_PREFIX)) {
+                    String time = msg.substring(IRR_PREFIX.length());
+                    try {
+                        Calendar calendar = Calendar.getInstance();
+                        java.sql.Date startDate = new java.sql.Date(calendar.getTime().getTime());
+
+                        // the mysql insert statement
+                        String query = " insert into dati (type, value, time)" + " values ( ?, ?, ?)";
+
+                        // create the mysql insert preparedstatement
+                        PreparedStatement preparedStmt = conn.prepareStatement(query);
+                        preparedStmt.setString(1, "I");
+                        preparedStmt.setString(2, time);
+                        preparedStmt.setDate(3, startDate);
+
+                        // execute the preparedstatement
+                        preparedStmt.execute();
+
+                    } catch (Exception e) {
+                        System.out.println(e);
+                    }
+                } else if (msg.startsWith(LOG_PREFIX)) {
+                    this.logger.log(msg.substring(LOG_PREFIX.length()));
+                } else if (msg.startsWith(ERROR_PREFIX)) {
+                    String segnalation = msg.substring(ERROR_PREFIX.length());
+                    try {
+                        Calendar calendar = Calendar.getInstance();
+                        java.sql.Date startDate = new java.sql.Date(calendar.getTime().getTime());
+
+                        // the mysql insert statement
+                        String query = " insert into dati (type, value, time)" + " values ( ?, ?, ?)";
+
+                        // create the mysql insert preparedstatement
+                        PreparedStatement preparedStmt = conn.prepareStatement(query);
+                        preparedStmt.setString(1, "E");
+                        preparedStmt.setString(2, segnalation);
+                        preparedStmt.setDate(3, startDate);
+
+                        // execute the preparedstatement
+                        preparedStmt.execute();
+
+                    } catch (Exception e) {
+                        System.out.println(e);
+                    }
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
 
 }

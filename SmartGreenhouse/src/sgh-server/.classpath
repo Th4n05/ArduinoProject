@@ -17,8 +17,8 @@
 	<classpathentry kind="lib" path="rxtx-2.2-dist/mac_osx/RXTXcomm.jar"/>
 	<classpathentry kind="lib" path="rxtx-2.2-dist/win-x64/RXTXcomm.jar"/>
 	<classpathentry kind="lib" path="rxtx-2.2-dist/win-x86/RXTXcomm.jar"/>
-	<classpathentry kind="lib" path="/Users/enricognagnarella/Desktop/ArduinoProject/SmartGreenhouse /src/sgh-server/lib/jtds-1.3.1.jar"/>
-	<classpathentry kind="lib" path="/Users/enricognagnarella/Desktop/ArduinoProject/SmartGreenhouse /src/sgh-server/lib/mysql-connector-java-5.1.16-bin.jar"/>
-	<classpathentry kind="lib" path="/Users/enricognagnarella/Desktop/ArduinoProject/SmartGreenhouse /src/sgh-server/lib/sqljdbc4.jar"/>
+	<classpathentry kind="lib" path="/Users/enricognagnarella/ArduinoProject/SmartGreenhouse/src/sgh-server/lib/jtds-1.3.1.jar"/>
+	<classpathentry kind="lib" path="/Users/enricognagnarella/ArduinoProject/SmartGreenhouse/src/sgh-server/lib/mysql-connector-java-5.1.16-bin.jar"/>
+	<classpathentry kind="lib" path="/Users/enricognagnarella/ArduinoProject/SmartGreenhouse/src/sgh-server/lib/sqljdbc4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
