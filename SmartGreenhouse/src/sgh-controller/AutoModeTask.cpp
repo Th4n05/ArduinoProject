@@ -72,7 +72,7 @@ void AutoModeTask::tick()
         state = IDLE;
         pSharedState->setFlow(P_CLOSE);
         Logger.log("ModeTask->Idle");
-        IrrigationSender.sendInfo(String(erogationTime));
+        IrrigationSender.sendInfo(String(erogationTime/=1000));
         erogationTime = 0;
         L2->switchOff();
       }
@@ -81,7 +81,7 @@ void AutoModeTask::tick()
         state = ERROR;
         Logger.log("AutoModeTask->Error");
         pSharedState->setFlow(P_CLOSE);
-        IrrigationSender.sendInfo(String(T_MAX));
+        IrrigationSender.sendInfo(String(T_MAX/=1000));
         erogationTime = 0;
         L2->switchOff();
       }
