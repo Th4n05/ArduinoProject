@@ -32,7 +32,7 @@ void ManualModeTask::tick()
   {
     Msg *msg = msgServicebt.receiveMsg();
     Logger.log(msg->getContent());
-    if (msg->getContent() == "CONNESSO")
+    if (msg->getContent() == "CONNESSO" && pSharedState->getDistance() < DIST)
     {
       Logger.log("Connessione in corso");
       pSharedState->setConnection();
@@ -40,22 +40,32 @@ void ManualModeTask::tick()
 
     if (pSharedState->isAutoMode() == false)
     {
-      if (msg->getContent() == "APERTO")
+      if (msg->getContent() == "APERTA")
 
       {
 
         pSharedState->setPumping();
+        Logger.log("Pompa aperta");
         pSharedState->setFlow(P_MIN);
+                Logger.log("Setto flow");
+
       }
-      else if (msg->getContent() == "CHIUSO")
+      else if (msg->getContent() == "CHIUSA")
       {
         pSharedState->setFinishPumping();
         pSharedState->setFlow(P_CLOSE);
       }
       else // condizione chiamata se non è nessuno dei precedenti
       {
-        pSharedState->setFlow(msg->getContent().toFloat());
+        int tempvalue = msg->getContent().toFloat() + 30;
+        pSharedState->setFlow(tempvalue);
       }
+    }
+
+    if (pSharedState->getDistance() > DIST) {
+      String automsg = "CONNESSIONENO";
+      
+      msgServicebt.sendMsg(automsg);
     }
 
 

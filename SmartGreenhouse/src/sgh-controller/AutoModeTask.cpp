@@ -15,7 +15,7 @@ AutoModeTask::AutoModeTask(SharedState *pSharedState)
 void AutoModeTask::init(int period)
 {
   Task::init(period);
-  L2 = new Led(L2_PIN);
+  L2 = new LedFaded(L2_PIN);
   L2->switchOff();
   erogationTime = 0;
   state = IDLE;
@@ -30,7 +30,7 @@ void AutoModeTask::tick()
     switch (state)
     {
     case IDLE:
-      //Logger.log("AutoModeTask->Idle");
+      Logger.log("AutoModeTask->Idle");
       if (pSharedState->getHumidity() < U_MIN)
       {
         state = CHOOSE;
@@ -47,21 +47,21 @@ void AutoModeTask::tick()
           pSharedState->setFlow(P_MIN);
           Logger.log("AutoModeTask->SetFLow PMIN");
           state = WAIT;
-          L2->switchOn();
+          L2->setIntensity(P_MIN);
         }
         else if (pSharedState->getHumidity() <= 20 && pSharedState->getHumidity() > 10)
         {
           pSharedState->setFlow(P_MED);
           Logger.log("AutoModeTask->SetFLow PMED");
           state = WAIT;
-          L2->switchOn();
+          L2->setIntensity(P_MED);
         }
         else if (pSharedState->getHumidity() <= 10 && pSharedState->getHumidity() >= 0)
         {
           pSharedState->setFlow(P_MAX);
           Logger.log("AutoModeTask->SetFLow PMAX");
           state = WAIT;
-          L2->switchOn();
+          L2->setIntensity(P_MAX);
         }
       }
       break;

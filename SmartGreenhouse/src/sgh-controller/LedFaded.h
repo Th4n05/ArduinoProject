@@ -3,9 +3,9 @@
 
 #include "Light.h"
 
-class Led: public Light { 
+class LedFaded: public Light { 
 public:
-  Led(int pin);
+  LedFaded(int pin);
   void switchOn();
   void setIntensity(int intensity);
   void switchOff();    

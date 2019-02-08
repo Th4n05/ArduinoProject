@@ -2,7 +2,8 @@
 #define __AUTOMODETASK__
 
 #include "Task.h"
-#include "Led.h"
+#include "LedFaded.h"
+
 #include "SharedState.h"
 
 
@@ -10,7 +11,7 @@
 class AutoModeTask: public Task {
 
     SharedState* pSharedState;
-    Led* L2;
+    LedFaded* L2;
     enum { IDLE, CHOOSE, WAIT, ERROR } state;
     int erogationTime;
     int period;

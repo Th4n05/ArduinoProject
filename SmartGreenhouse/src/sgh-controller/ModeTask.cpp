@@ -21,7 +21,7 @@ void ModeTask::tick()
 {
   if (pSharedState->isAutoMode())
   { 
-    if (/*pSharedState->getDistance() <= DIST &&*/ pSharedState->isConnected())
+    if (pSharedState->getDistance() <= DIST && pSharedState->isConnected())
     {
       Logger.log("Manual Mode");
       pSharedState->setManualMode();
@@ -37,7 +37,7 @@ void ModeTask::tick()
   {
     //Logger.log("Manual Mode");
 
-    /*if (pSharedState->getDistance() > DIST)
+    if (pSharedState->getDistance() > DIST)
     {
       Logger.log("Automathic Mode");
 
@@ -45,9 +45,9 @@ void ModeTask::tick()
       pSharedState->setFinishConnection();
       pSharedState->setFinishPumping();
       pSharedState->setFlow(P_CLOSE);
-      //Logger.log("ModeTask->Automatic Mode");
+      Logger.log(String(pSharedState->isConnected()));
       LM->switchOff();
       L1->switchOn();
-    }*/
+    }
   }
 }

@@ -20,16 +20,16 @@ void IrrigationTask::init(int period)
 void IrrigationTask::tick()
 {
   int value = pSharedState->getFlow();
-  if (value != precPos) {
+  //if (value != precPos) {
     pMotor->on();
-    for (int i = 0; i < pSharedState->getFlow(); i++)
+    for (int i = 0; i < value; i++)
     {
       pMotor->setPosition(pos);
       //delay(5);
       pos += delta;
     }
     pMotor->off();
-    precPos = value;
-  }
+    //precPos = value;
+  //}
 
 }
