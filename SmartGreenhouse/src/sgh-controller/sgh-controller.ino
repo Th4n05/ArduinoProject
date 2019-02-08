@@ -35,16 +35,16 @@ void setup()
   sched.addTask(t0);
 
   Task *t1 = new ModeTask(pSharedState);
-  t1->init(100);
+  t1->init(50);
   sched.addTask(t1);
 
-  Task *t2 = new AutoModeTask(pSharedState);
+  /*Task *t2 = new AutoModeTask(pSharedState);
   t2->init(50);
-  sched.addTask(t2);
+  sched.addTask(t2);*/
 
-  Task *t3 = new IrrigationTask(pSharedState);
-  t3->init(150);
-  sched.addTask(t3);
+  /*Task *t3 = new IrrigationTask(pSharedState);
+  t3->init(50);
+  sched.addTask(t3);*/
 
   Task *t4 = new HumidityTask(pSharedState);
   t4->init(50);

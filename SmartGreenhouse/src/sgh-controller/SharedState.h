@@ -19,7 +19,7 @@ public:
     btConnection = false;
     flow = 30;
     distance = 0;
-    humidity = 25;
+    humidity = 50;
     pumping = false;
   }
 

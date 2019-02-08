@@ -28,7 +28,7 @@ class SmartCMConsole {
             System.out.println("DataSource.getConnection() driver = " + driver);
             Class.forName(driver);
             System.out.println("DataSource.getConnection() dbUri = " + dbUri);
-            connection = DriverManager.getConnection(dbUri, userName, password);
+            //connection = DriverManager.getConnection(dbUri, userName, password);
             System.out.println("Connessione stabilita");
 
         } catch (ClassNotFoundException e) {

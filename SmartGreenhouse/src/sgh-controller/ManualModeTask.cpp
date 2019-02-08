@@ -2,54 +2,64 @@
 #include "Arduino.h"
 #include "config.h"
 #include "MsgServiceBT.h"
+#include "Logger.h"
+
+MsgServiceBT msgServicebt(2, 3);
 
 ManualModeTask::ManualModeTask(SharedState *pSharedState)
 {
-    this->pSharedState = pSharedState;
-    
+  this->pSharedState = pSharedState;
+
+
 }
 
 void ManualModeTask::init(int period)
 {
-    Task::init(period);
-    
+  Task::init(period);
+
+  msgServicebt.init();
+
 }
 
 void ManualModeTask::tick()
 {
-    MsgServiceBT msgServicebt(2, 3);
-    msgServicebt.init();
-    //tutte le volte gli faccio mandare l'umidita via messaggio
+  if (pSharedState->isAutoMode() == false)
+  {
     msgServicebt.sendMsg(String(pSharedState->getHumidity()));
-    if (msgServicebt.isMsgAvailable())
+  }
+  //tutte le volte gli faccio mandare l'umidita via messaggio
+  if (msgServicebt.isMsgAvailable())
+  {
+    Msg *msg = msgServicebt.receiveMsg();
+    Logger.log(msg->getContent());
+    if (msg->getContent() == "CONNESSO")
     {
-        Msg *msg = msgServicebt.receiveMsg();
-        if (msg->getContent() == "Connection")
-        {
-            pSharedState->setConnection();
-        }
-        else
-        {
-            if (!pSharedState->isAutoMode())
-            {
-                if (msg->getContent() == "Open")
-                {
-                    pSharedState->setPumping();
-                   pSharedState->setFlow(P_MIN); 
-                }
-                else if (msg->getContent() == "Closed")
-                {
-                    pSharedState->setFinishPumping();
-                   pSharedState->setFlow(P_CLOSE); 
-                }
-                else // condizione chiamata se non è nessuno dei precedenti
-                {
-                    pSharedState->setFlow(msg->getContent().toFloat()); 
-                }
-            }
-        }
-
-        delete msg;
+      Logger.log("Connessione in corso");
+      pSharedState->setConnection();
     }
+
+    if (pSharedState->isAutoMode() == false)
+    {
+      if (msg->getContent() == "APERTO")
+
+      {
+
+        pSharedState->setPumping();
+        pSharedState->setFlow(P_MIN);
+      }
+      else if (msg->getContent() == "CHIUSO")
+      {
+        pSharedState->setFinishPumping();
+        pSharedState->setFlow(P_CLOSE);
+      }
+      else // condizione chiamata se non è nessuno dei precedenti
+      {
+        pSharedState->setFlow(msg->getContent().toFloat());
+      }
+    }
+
+
+    delete msg;
+  }
 
 }

@@ -32,16 +32,15 @@ public class MonitoringAgent extends Thread {
         while (true) {
             try {
                 String msg = channel.receiveMsg();
+                Calendar calendar = Calendar.getInstance();
+                java.sql.Date startDate = new java.sql.Date(calendar.getTime().getTime());
+                Timestamp timestamp = new Timestamp(startDate.getTime());
+
+                // the mysql insert statement
+                String query = " insert into dati (type, value, time)" + " values ( ?, ?, ?)";
                 if (msg.startsWith(IRR_PREFIX)) {
                     String time = msg.substring(IRR_PREFIX.length());
                     try {
-                        Calendar calendar = Calendar.getInstance();
-                        java.sql.Date startDate = new java.sql.Date(calendar.getTime().getTime());
-                        Timestamp timestamp = new Timestamp(startDate.getTime());
-
-                        // the mysql insert statement
-                        String query = " insert into dati (type, value, time)" + " values ( ?, ?, ?)";
-
                         // create the mysql insert preparedstatement
                         PreparedStatement preparedStmt = conn.prepareStatement(query);
                         preparedStmt.setString(1, "I");
@@ -59,13 +58,6 @@ public class MonitoringAgent extends Thread {
                 } else if (msg.startsWith(ERROR_PREFIX)) {
                     String segnalation = msg.substring(ERROR_PREFIX.length());
                     try {
-                        Calendar calendar = Calendar.getInstance();
-                        java.sql.Date startDate = new java.sql.Date(calendar.getTime().getTime());
-                        Timestamp timestamp = new Timestamp(startDate.getTime());
-
-                        // the mysql insert statement
-                        String query = " insert into dati (type, value, time)" + " values ( ?, ?, ?)";
-
                         // create the mysql insert preparedstatement
                         PreparedStatement preparedStmt = conn.prepareStatement(query);
                         preparedStmt.setString(1, "E");
