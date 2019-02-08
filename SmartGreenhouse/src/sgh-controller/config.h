@@ -12,7 +12,7 @@
 
 /* modality led */
 #define L1_PIN 10
-#define L2_PIN 12
+#define L2_PIN 5
 #define LM_PIN 13
 
 /* SOFTWARE COSTANT */

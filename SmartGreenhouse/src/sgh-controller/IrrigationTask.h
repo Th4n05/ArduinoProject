@@ -12,6 +12,7 @@ class IrrigationTask : public Task
     ServoMotor *pMotor;
     int pos;
     int delta;
+    int precPos;
 
   public:
     IrrigationTask(SharedState *pState);
