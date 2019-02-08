@@ -7,14 +7,10 @@ import seiot.modulo_lab_2_2.msg.jssc.*;
 
 public class Controller /* implements ActionListener */ {
 
-	// static final String MSG_REQUEST_TO_ENTER = "1";
-	// static final String MSG_STOP = "2";
-
 	SerialCommChannel channel;
 	private final Connection conn;
 
-	public Controller(String port, /* SmartCMView view, */ LogView logger, Connection conn) throws Exception {
-		// this.view = view;
+	public Controller(String port, LogView logger, Connection conn) throws Exception {
 		channel = new SerialCommChannel(port, 9600);
 		this.conn = conn;
 		new MonitoringAgent(channel, /* view, */logger, conn).start();
@@ -36,7 +32,7 @@ public class Controller /* implements ActionListener */ {
 			System.out.println(timestamp);
 
 			// the mysql insert statement
-			String query = " insert into dati (type, value, time)" + " values ( ?, ?, ?)";
+			String query = " insert into dati (type, value, tempo)" + " values ( ?, ?, ?)";
 
 			// create the mysql insert preparedstatement
 			PreparedStatement preparedStmt = conn.prepareStatement(query);
@@ -50,15 +46,5 @@ public class Controller /* implements ActionListener */ {
 			e.printStackTrace();
 		}
 	}
-
-	// public void actionPerformed(ActionEvent ev){
-	// try {
-	// if (ev.getActionCommand().equals("Refill")){
-	// channel.sendMsg("10");
-	// }
-	// } catch (Exception ex){
-	// ex.printStackTrace();
-	// }
-	// }
 
 }
