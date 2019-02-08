@@ -63,7 +63,7 @@ void ManualModeTask::tick()
     }
 
     if (pSharedState->getDistance() > DIST) {
-      String automsg = "CONNESSIONENO";
+      String automsg = "A";
       
       msgServicebt.sendMsg(automsg);
     }
